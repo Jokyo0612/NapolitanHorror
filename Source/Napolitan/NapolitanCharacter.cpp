@@ -64,7 +64,7 @@ void ANapolitanCharacter::Tick(float DeltaTime)
 	float CurrentZ = CameraBoom->GetRelativeLocation().Z;
 
 	float StandingHalfHeight = GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
-	float CrouchedHalfHeight = GetCharacterMovement()->CrouchedHalfHeight;
+	float CrouchedHalfHeight = GetCharacterMovement()->GetCrouchedHalfHeight();
 	float TotalAdjustment = StandingHalfHeight - CrouchedHalfHeight;
 
 	float TargetZ = bIsCrouched ? (DefaultCameraLoc.Z - TotalAdjustment) : DefaultCameraLoc.Z;
