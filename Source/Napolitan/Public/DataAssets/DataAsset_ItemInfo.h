@@ -6,6 +6,13 @@
 #include "Engine/DataAsset.h"
 #include "DataAsset_ItemInfo.generated.h"
 
+UENUM(BlueprintType)
+enum class EItemCategory : uint8
+{
+    Usable      UMETA(DisplayName = "Usable Item"),
+    Quest       UMETA(DisplayName = "Quest Item"),
+    ReadOnly    UMETA(DisplayName = "Read Only")
+};
 /**
  * 
  */
@@ -16,7 +23,7 @@ class NAPOLITAN_API UDataAsset_ItemInfo : public UDataAsset
 	
 public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemInfo")
-    FPrimaryAssetType ItemType; // 종류
+    EItemCategory ItemType; // 종류
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ItemInfo")
     FName ItemID; // 식별 코드

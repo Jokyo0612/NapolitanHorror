@@ -11,3 +11,8 @@ ANPBaseCharacter::ANPBaseCharacter()
 
 }
 
+UPawnUIComponent* ANPBaseCharacter::GetPawnUIComponent() const
+{
+	return nullptr;
+}
+

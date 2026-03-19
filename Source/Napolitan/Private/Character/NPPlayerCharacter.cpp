@@ -7,16 +7,18 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/SpotLightComponent.h"
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
-#include "Components/SpotLightComponent.h"
 #include "InputAction.h"
 #include "EnhancedInputSubsystems.h"
-#include "Components/Input/NPInputComponent.h"
 #include "DataAssets/DataAsset_InputConfig.h"
+#include "Components/Input/NPInputComponent.h"
+#include "Components/Items/ItemInventoryComponentBase.h"
+#include "Components/UI/PlayerUIComponent.h"
 #include "NPGameplayTag.h"
 
 #include "DebugHelper.h"
@@ -74,6 +76,10 @@ ANPPlayerCharacter::ANPPlayerCharacter()
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 	GetCharacterMovement()->AirControl = 0.5f;
 	GetCharacterMovement()->MaxWalkSpeedCrouched = CrouchSpeed;
+
+	// Inventory
+	PlayerInventoryComponent = CreateDefaultSubobject<UItemInventoryComponentBase>(TEXT("PlayerInventoryComponent"));
+	PlayerUIComponent = CreateDefaultSubobject<UPlayerUIComponent>(TEXT("PlayerUIComponent"));
 }
 
 void ANPPlayerCharacter::BeginPlay()
@@ -388,4 +394,19 @@ void ANPPlayerCharacter::Interact()
 		IInteractInterface::Execute_Interact(TargetActor, this);
 		Debug::Print((TEXT("Interact Activated %s"), TargetActor->GetActorNameOrLabel()));
 	}
+}
+
+UItemInventoryComponentBase* ANPPlayerCharacter::GetInventoryComponentDefualt() const
+{
+	return PlayerInventoryComponent;
+}
+
+UPawnUIComponent* ANPPlayerCharacter::GetPawnUIComponent() const
+{
+	return PlayerUIComponent;
+}
+
+UPlayerUIComponent* ANPPlayerCharacter::GetPlayerUIComponent() const
+{
+	return PlayerUIComponent;
 }

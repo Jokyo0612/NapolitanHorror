@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Character/NPBaseCharacter.h"
 #include "Interface/InteractInterface.h"
+#include "Interface/InventoryInterface.h"
 #include "NPPlayerCharacter.generated.h"
 
 class UInputComponent;
@@ -14,6 +15,8 @@ class UInputAction;
 struct FInputActionValue;
 class USpotLightComponent;
 class UDataAsset_InputConfig;
+class UPawnUIComponent;
+class UPlayerUIComponent;
 
 // DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateSprintMeterDelegate, float, Percentage);
 // DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSprintStateChangedDelegate, bool, bSprinting);
@@ -22,7 +25,7 @@ class UDataAsset_InputConfig;
  * 
  */
 UCLASS()
-class NAPOLITAN_API ANPPlayerCharacter : public ANPBaseCharacter, public IInteractInterface
+class NAPOLITAN_API ANPPlayerCharacter : public ANPBaseCharacter, public IInteractInterface, public IInventoryInterface
 {
 	GENERATED_BODY()
 
@@ -44,6 +47,12 @@ class NAPOLITAN_API ANPPlayerCharacter : public ANPBaseCharacter, public IIntera
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USpotLightComponent* SpotLight;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = "true"))
+	UItemInventoryComponentBase* PlayerInventoryComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI", meta = (AllowPrivateAccess = "true"))
+	UPlayerUIComponent* PlayerUIComponent;
 
 // -------------------------------- need to implement -------------------------------- //
 /* UI 수정시 통합 수정 필요 (cpp file +) */
@@ -179,7 +188,6 @@ protected:
 #pragma endregion
 
 #pragma region Input_Interact
-protected:
 	// Timer 0.1 sec instead of Tick
 	FTimerHandle TimerHandle_Interaction;
 
@@ -189,6 +197,17 @@ protected:
 	void PerformInteractionCheck();
 
 	void Interact();
+
+#pragma endregion
+
+#pragma region UI_Inventory
+public:
+	//~Begin IInventory Interface
+	virtual UItemInventoryComponentBase* GetInventoryComponentDefualt() const override;
+	//~End IInventory Interface
+
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	virtual UPlayerUIComponent* GetPlayerUIComponent() const override;
 
 #pragma endregion
 };
