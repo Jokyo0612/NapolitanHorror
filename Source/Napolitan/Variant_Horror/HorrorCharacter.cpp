@@ -87,7 +87,7 @@ void AHorrorCharacter::DoStartSprint()
 		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 
 		// call the sprint state changed delegate
-		OnSprintStateChanged.Broadcast(true);
+		//OnSprintStateChanged.Broadcast(true);
 	}
 
 }
@@ -104,7 +104,7 @@ void AHorrorCharacter::DoEndSprint()
 		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 
 		// call the sprint state changed delegate
-		OnSprintStateChanged.Broadcast(false);
+		//OnSprintStateChanged.Broadcast(false);
 	}
 }
 
@@ -149,13 +149,13 @@ void AHorrorCharacter::SprintFixedTick()
 			GetCharacterMovement()->MaxWalkSpeed = bSprinting ? SprintSpeed : WalkSpeed;
 
 			// update the sprint state depending on whether the button is down or not
-			OnSprintStateChanged.Broadcast(bSprinting);
+			//OnSprintStateChanged.Broadcast(bSprinting);
 		}
 
 	}
 
 	// broadcast the sprint meter updated delegate
-	OnSprintMeterUpdated.Broadcast(SprintMeter / SprintTime);
+	//OnSprintMeterUpdated.Broadcast(SprintMeter / SprintTime);
 
 }
 

@@ -16,3 +16,8 @@ UPawnUIComponent* ANPBaseCharacter::GetPawnUIComponent() const
 	return nullptr;
 }
 
+void ANPBaseCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+}
+

@@ -19,4 +19,6 @@ public:
 	ANPBaseCharacter();
 
 	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+
+	virtual void PossessedBy(AController* NewController) override;
 };

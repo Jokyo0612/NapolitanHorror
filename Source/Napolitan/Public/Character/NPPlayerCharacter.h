@@ -18,9 +18,6 @@ class UDataAsset_InputConfig;
 class UPawnUIComponent;
 class UPlayerUIComponent;
 
-// DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateSprintMeterDelegate, float, Percentage);
-// DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSprintStateChangedDelegate, bool, bSprinting);
-
 /**
  * 
  */
@@ -53,16 +50,6 @@ class NAPOLITAN_API ANPPlayerCharacter : public ANPBaseCharacter, public IIntera
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI", meta = (AllowPrivateAccess = "true"))
 	UPlayerUIComponent* PlayerUIComponent;
-
-// -------------------------------- need to implement -------------------------------- //
-/* UI 수정시 통합 수정 필요 (cpp file +) */
-public:
-	/** Delegate called when the sprint meter should be updated */
-	// FUpdateSprintMeterDelegate OnSprintMeterUpdated;
-
-	/** Delegate called when we start and stop sprinting */
-	// FSprintStateChangedDelegate OnSprintStateChanged;
-// ----------------------------------------------------------------------------------- //
 
 protected:
 
@@ -208,6 +195,13 @@ public:
 
 	virtual UPawnUIComponent* GetPawnUIComponent() const override;
 	virtual UPlayerUIComponent* GetPlayerUIComponent() const override;
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void ItemListCall();
+
+protected:
+	float LastUICallTime = 0.0f;
+	float UICallCooldown = 1.0f;
 
 #pragma endregion
 };

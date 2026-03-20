@@ -19,6 +19,7 @@ class NAPOLITAN_API UNPWidgetBase : public UUserWidget
 protected:
 	virtual void NativeOnInitialized() override;
 
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning HeroUIComponent Initialized"))
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning PlayerUIComponent Initialized"))
 	void BP_OnOwningHeroUIComponentInitialized(UPlayerUIComponent* OwningPlayerComponent);
+
 };

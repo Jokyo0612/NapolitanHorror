@@ -10,8 +10,8 @@
 class USpotLightComponent;
 class UInputAction;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateSprintMeterDelegate, float, Percentage);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSprintStateChangedDelegate, bool, bSprinting);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateSprintMeterDelegate, float, Percentage);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSprintStateChangedDelegate, bool, bSprinting);
 
 /**
  *  Simple first person horror character
@@ -67,10 +67,10 @@ protected:
 public:
 
 	/** Delegate called when the sprint meter should be updated */
-	FUpdateSprintMeterDelegate OnSprintMeterUpdated;
+	//FUpdateSprintMeterDelegate OnSprintMeterUpdated;
 
 	/** Delegate called when we start and stop sprinting */
-	FSprintStateChangedDelegate OnSprintStateChanged;
+	//FSprintStateChangedDelegate OnSprintStateChanged;
 
 protected:
 

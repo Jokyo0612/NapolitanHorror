@@ -157,6 +157,9 @@ void ANPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	// Interact
 	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_Interact, ETriggerEvent::Started, this, &ThisClass::Interact);
 
+	// Inventory
+	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_ItemListCall, ETriggerEvent::Started, this, &ThisClass::ItemListCall);
+
 }
 
 
@@ -275,7 +278,7 @@ void ANPPlayerCharacter::DoStartSprint()
 		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 
 		// call the sprint state changed delegate
-		// OnSprintStateChanged.Broadcast(true);
+		PlayerUIComponent->OnSprintStateChanged.Broadcast(true);
 	}
 
 }
@@ -292,7 +295,7 @@ void ANPPlayerCharacter::DoEndSprint()
 		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 
 		// call the sprint state changed delegate
-		// OnSprintStateChanged.Broadcast(false);
+		PlayerUIComponent->OnSprintStateChanged.Broadcast(false);
 	}
 }
 
@@ -338,13 +341,13 @@ void ANPPlayerCharacter::SprintFixedTick()
 			GetCharacterMovement()->MaxWalkSpeed = bSprinting ? SprintSpeed : WalkSpeed;
 
 			// update the sprint state depending on whether the button is down or not
-			// OnSprintStateChanged.Broadcast(bSprinting);
+			PlayerUIComponent->OnSprintStateChanged.Broadcast(bSprinting);
 		}
 
 	}
 
 	// broadcast the sprint meter updated delegate
-	// OnSprintMeterUpdated.Broadcast(SprintMeter / SprintTime);
+	PlayerUIComponent->OnSprintMeterUpdated.Broadcast(SprintMeter / SprintTime);
 
 }
 
@@ -409,4 +412,17 @@ UPawnUIComponent* ANPPlayerCharacter::GetPawnUIComponent() const
 UPlayerUIComponent* ANPPlayerCharacter::GetPlayerUIComponent() const
 {
 	return PlayerUIComponent;
+}
+
+void ANPPlayerCharacter::ItemListCall()
+{
+	float CurrentTime = GetWorld()->GetTimeSeconds();
+
+	if (CurrentTime - LastUICallTime >= UICallCooldown)
+	{
+		LastUICallTime = CurrentTime;
+
+		PlayerUIComponent->OnInventoryCalled.Broadcast();
+		Debug::Print(TEXT("UI Called"));
+	}
 }

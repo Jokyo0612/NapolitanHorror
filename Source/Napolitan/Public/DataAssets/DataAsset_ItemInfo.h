@@ -11,7 +11,8 @@ enum class EItemCategory : uint8
 {
     Usable      UMETA(DisplayName = "Usable Item"),
     Quest       UMETA(DisplayName = "Quest Item"),
-    ReadOnly    UMETA(DisplayName = "Read Only")
+    ReadOnly    UMETA(DisplayName = "Read Only"),
+    Equipment   UMETA(DisplayName = "Equipment")
 };
 /**
  * 

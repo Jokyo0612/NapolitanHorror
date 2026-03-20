@@ -9,7 +9,7 @@
 class UDataAsset_ItemInfo;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryUpdated, UDataAsset_ItemInfo*, ItemData);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnItemUsed, UDataAsset_ItemInfo*, ItemData);
+// DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnItemUsed, UDataAsset_ItemInfo*, ItemData);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class NAPOLITAN_API UItemInventoryComponentBase : public UPawnExtensionComponentBase
@@ -20,8 +20,8 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
     FOnInventoryUpdated OnInventoryUpdated;
 
-    UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
-    FOnItemUsed OnItemUsed;
+    //UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
+    //FOnItemUsed OnItemUsed;
 
     // 아이템 추가 함수
     UFUNCTION(BlueprintCallable, Category = "Inventory")
