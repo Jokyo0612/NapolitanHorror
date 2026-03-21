@@ -201,7 +201,7 @@ public:
 
 protected:
 	float LastUICallTime = 0.0f;
-	float UICallCooldown = 1.0f;
+	float UICallCooldown = 1.5f;
 
 #pragma endregion
 };

@@ -416,13 +416,12 @@ UPlayerUIComponent* ANPPlayerCharacter::GetPlayerUIComponent() const
 
 void ANPPlayerCharacter::ItemListCall()
 {
-	float CurrentTime = GetWorld()->GetTimeSeconds();
+	float CurrentTime = GetWorld()->GetRealTimeSeconds();
 
 	if (CurrentTime - LastUICallTime >= UICallCooldown)
 	{
 		LastUICallTime = CurrentTime;
 
 		PlayerUIComponent->OnInventoryCalled.Broadcast();
-		Debug::Print(TEXT("UI Called"));
 	}
 }

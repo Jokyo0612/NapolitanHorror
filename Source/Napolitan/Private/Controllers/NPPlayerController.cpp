@@ -5,6 +5,7 @@
 #include "Character/NPPlayerCharacter.h"
 #include "Widget/NPWidgetBase.h"
 #include "Engine/LocalPlayer.h"
+#include "Kismet/GameplayStatics.h"
 
 
 void ANPPlayerController::OnPossess(APawn* aPawn)
@@ -25,4 +26,27 @@ void ANPPlayerController::OnPossess(APawn* aPawn)
 			}
 		}
 	}
+}
+
+void ANPPlayerController::SetUIInputMode(bool bIsUIOpen)
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), bIsUIOpen);
+
+    if (bIsUIOpen)
+    {
+		FlushPressedKeys();
+
+        bShowMouseCursor = true;
+        FInputModeGameAndUI InputMode;
+        InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockInFullscreen);
+
+        SetInputMode(InputMode);
+    }
+    else
+    {
+        bShowMouseCursor = false;
+
+        FInputModeGameOnly InputMode;
+        SetInputMode(InputMode);
+    }
 }

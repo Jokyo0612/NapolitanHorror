@@ -15,9 +15,13 @@ UCLASS()
 class NAPOLITAN_API ANPPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "UI")
+	void SetUIInputMode(bool bIsUIOpen);
+
 protected:
-	UPROPERTY(EditAnywhere, Category = "MainUI")
+	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<UNPWidgetBase> DefaultUIClass;
 
 	UPROPERTY()
