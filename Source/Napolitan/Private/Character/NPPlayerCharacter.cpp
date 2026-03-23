@@ -377,7 +377,6 @@ void ANPPlayerCharacter::PerformInteractionCheck()
 			if (TargetActor != HitActor)
 			{
 				TargetActor = HitActor;
-				Debug::Print((TEXT("Target Found: %s"), *HitActor->GetName()));
 			}
 			return;
 		}

@@ -2,8 +2,8 @@
 
 
 #include "Items/NPItemBase.h"
-#include "DataAssets/DataAsset_ItemInfo.h"
 #include "Components/BoxComponent.h"
+
 #include "DebugHelper.h"
 
 // Sets default values
@@ -28,7 +28,6 @@ ANPItemBase::ANPItemBase()
 
 void ANPItemBase::Interact_Implementation(AActor* Interactor)
 {
-	// if (ItemData == nullptr) return;
 	Debug::Print(TEXT("Interact Succeed"));
 	return;
 }
