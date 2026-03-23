@@ -4,10 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "Components/PawnExtensionComponentBase.h"
+#include "DataAssets/S_ItemInfo.h"
 #include "ItemInventoryComponentBase.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryUpdated, FName, ItemName);
-// DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnItemUsed, UDataAsset_ItemInfo*, ItemData);
+USTRUCT(BlueprintType)
+struct FInventoryArray {
+    GENERATED_BODY()
+
+    UPROPERTY()
+    TArray<FName> Items;
+};
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class NAPOLITAN_API UItemInventoryComponentBase : public UPawnExtensionComponentBase
@@ -15,13 +21,6 @@ class NAPOLITAN_API UItemInventoryComponentBase : public UPawnExtensionComponent
 	GENERATED_BODY()
 
 public:
-    UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
-    FOnInventoryUpdated OnInventoryUpdated;
-
-    //UPROPERTY(BlueprintAssignable, Category = "Inventory|Events")
-    //FOnItemUsed OnItemUsed;
-
-    // 아이템 추가 함수
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     bool AddItem(FName NewItem);
 
@@ -29,10 +28,19 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Inventory")
     void UseItem(FName ItemToUse);
 
+    UFUNCTION(BlueprintCallable, Category = "Inventory")
+    const TArray<FName>& GetItems(EItemCategory Category) const;
+
+    FS_Item* GetItemData(FName ItemID) const;
+
+    UFUNCTION(BlueprintPure, Category = "Inventory")
+    FS_Item BP_GetItemData(FName ItemID, bool& bSuccess) const;
+
 protected:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory")
     TObjectPtr<UDataTable> ItemDataTable;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
-    TArray<FName> Items;
+    TMap<EItemCategory, FInventoryArray> CategorizedItems;
+
+    virtual void BeginPlay() override;
 };

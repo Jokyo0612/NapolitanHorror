@@ -16,15 +16,19 @@ bool UItemInventoryComponentBase::AddItem(FName NewItem)
 
     FS_Item* ItemData = ItemDataTable->FindRow<FS_Item>(NewItem, TEXT(""));
 
-    if (ItemData && !Items.Contains(NewItem))
+    TArray<FName>& InventorySection = CategorizedItems[ItemData->ItemType].Items;
+
+    if (ItemData && !InventorySection.Contains(NewItem))
     {
-        Items.Add(NewItem);
-        OnInventoryUpdated.Broadcast(NewItem);
+        InventorySection.Add(NewItem);
+
+        // 실시간 업데이트 필요시 델리게이트 정의
+        // OnInventoryUpdated.Broadcast(NewItem);
 
         Debug::Print((TEXT("Items acquired : %s"), *ItemData->ItemName.ToString()));
 
         Debug::Print(TEXT("Inventory now on"));
-        for (auto item : Items)
+        for (auto item : InventorySection)
         {
             Debug::Print((TEXT("&s"), item.ToString()));
         }
@@ -39,8 +43,44 @@ void UItemInventoryComponentBase::UseItem(FName ItemToUse)
 {
 	// Player Event State Check Needed
 
-	if (Items.Contains(ItemToUse))
+    FS_Item* ItemData = ItemDataTable->FindRow<FS_Item>(ItemToUse, TEXT(""));
+
+    TArray<FName>& InventorySection = CategorizedItems[ItemData->ItemType].Items;
+
+	if (InventorySection.Contains(ItemToUse))
 	{
-		Items.Remove(ItemToUse);
+        InventorySection.Remove(ItemToUse);
 	}
 }
+
+const TArray<FName>& UItemInventoryComponentBase::GetItems(EItemCategory Category) const
+{
+    return CategorizedItems[Category].Items;
+}
+
+FS_Item* UItemInventoryComponentBase::GetItemData(FName ItemID) const
+{
+    if (!ItemDataTable) return nullptr;
+
+    return ItemDataTable->FindRow<FS_Item>(ItemID, TEXT("GetItemData"));
+}
+
+FS_Item UItemInventoryComponentBase::BP_GetItemData(FName ItemID, bool& bSuccess) const
+{
+    FS_Item* FoundData = GetItemData(ItemID);
+
+    bSuccess = (FoundData != nullptr);
+
+    return bSuccess ? *FoundData : FS_Item();
+}
+
+void UItemInventoryComponentBase::BeginPlay()
+{
+    Super::BeginPlay();
+
+    CategorizedItems.FindOrAdd(EItemCategory::Usable);
+    CategorizedItems.FindOrAdd(EItemCategory::Quest);
+    CategorizedItems.FindOrAdd(EItemCategory::ReadOnly);
+}
+
+

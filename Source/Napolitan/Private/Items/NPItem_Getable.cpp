@@ -9,8 +9,6 @@
 
 void ANPItem_Getable::Interact_Implementation(AActor* Interactor)
 {
-	Debug::Print((TEXT("Interactor : %s"), Interactor->GetActorNameOrLabel()));
-
 	if (!Interactor || ItemHandle.IsNull()) return;
 
 	if (IInventoryInterface* PawnInventoryInterface = Cast<IInventoryInterface>(Interactor))
@@ -26,5 +24,4 @@ void ANPItem_Getable::Interact_Implementation(AActor* Interactor)
 			}
 		}
 	}
-
 }
