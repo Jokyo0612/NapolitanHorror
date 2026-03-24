@@ -160,6 +160,8 @@ void ANPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	// Inventory
 	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_ItemListCall, ETriggerEvent::Started, this, &ThisClass::ItemListCall);
 
+	// Phone & Narration Bar
+	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_NextSentence, ETriggerEvent::Started, this, &ThisClass::Next_Sentence);
 }
 
 
@@ -349,6 +351,13 @@ void ANPPlayerCharacter::SprintFixedTick()
 	// broadcast the sprint meter updated delegate
 	PlayerUIComponent->OnSprintMeterUpdated.Broadcast(SprintMeter / SprintTime);
 
+}
+
+void ANPPlayerCharacter::Next_Sentence()
+{
+	// Need to implement event based interaction key
+
+	Debug::Print(TEXT("Pressed Phone / Event Interaction Button"));
 }
 
 void ANPPlayerCharacter::PerformInteractionCheck()

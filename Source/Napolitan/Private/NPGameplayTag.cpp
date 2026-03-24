@@ -13,4 +13,5 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Sprint, "InputTag.Sprint");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Interact, "InputTag.Interact");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_ItemListCall, "InputTag.ItemListCall");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_NextSentence, "InputTag.NextSentence");
 }

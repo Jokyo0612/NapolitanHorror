@@ -172,6 +172,10 @@ protected:
 	/** Called while sprinting at a fixed time interval */
 	void SprintFixedTick();
 
+	/** Go to Next Event Talk or Phone */
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void Next_Sentence();
+
 #pragma endregion
 
 #pragma region Input_Interact
