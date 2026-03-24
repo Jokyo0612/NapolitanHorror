@@ -394,7 +394,7 @@ void ANPPlayerCharacter::Interact()
 	if (TargetActor)
 	{
 		IInteractInterface::Execute_Interact(TargetActor, this);
-		Debug::Print((TEXT("Interact Activated %s"), TargetActor->GetActorNameOrLabel()));
+		Debug::Print((TEXT("%s"), TargetActor->GetActorNameOrLabel()));
 	}
 }
 

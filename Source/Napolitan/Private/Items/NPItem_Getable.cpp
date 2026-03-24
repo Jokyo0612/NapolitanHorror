@@ -5,8 +5,6 @@
 #include "Interface/InventoryInterface.h"
 #include "Components/Items/ItemInventoryComponentBase.h"
 
-#include "DebugHelper.h"
-
 void ANPItem_Getable::Interact_Implementation(AActor* Interactor)
 {
 	if (!Interactor || ItemHandle.IsNull()) return;

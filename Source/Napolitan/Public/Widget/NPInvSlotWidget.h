@@ -7,6 +7,8 @@
 #include "DataAssets/S_ItemInfo.h"
 #include "NPInvSlotWidget.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSlotClicked, const FS_Item&, Item_Data);
+
 /**
  * 
  */
@@ -17,6 +19,9 @@ class NAPOLITAN_API UNPInvSlotWidget : public UUserWidget
 
 public:
     void UpdateSlot(FName NewItemID, FS_Item* ItemData);
+
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Events")
+    FOnSlotClicked OnSlotClicked;
 
 protected:
     UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")

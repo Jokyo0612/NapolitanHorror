@@ -33,6 +33,8 @@ void UNPInventoryWidgetBase::NativeOnInitialized()
                 if (UNPInvSlotWidget* NewSlot = Cast<UNPInvSlotWidget>(Child))
                 {
                     Pair.Value.InvSlots.Add(NewSlot);
+
+                    NewSlot->OnSlotClicked.AddDynamic(this, &UNPInventoryWidgetBase::HandleSlotClick);
                 }
             }
         }

@@ -4,8 +4,6 @@
 #include "Widget/NPWidgetBase.h"
 #include "Interface/PawnUIInterface.h"
 
-#include "DebugHelper.h"
-
 void UNPWidgetBase::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();

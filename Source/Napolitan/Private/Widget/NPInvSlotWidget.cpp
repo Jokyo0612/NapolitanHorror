@@ -5,7 +5,6 @@
 #include "DataAssets/S_ItemInfo.h"
 #include "Components/Items/ItemInventoryComponentBase.h"
 
-#include "DebugHelper.h"
 
 void UNPInvSlotWidget::UpdateSlot(FName NewItemID, FS_Item* ItemData)
 {
@@ -21,8 +20,6 @@ void UNPInvSlotWidget::UpdateSlot(FName NewItemID, FS_Item* ItemData)
     if (Data)
     {
         CachedItemData = *Data;
-
-        Debug::Print((TEXT("%s"), CachedItemData.ItemName.ToString()));
 
         BP_UpdateVisuals();
     }

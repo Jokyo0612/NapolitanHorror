@@ -4,13 +4,20 @@
 #include "Components/Items/ItemInventoryComponentBase.h"
 #include "DataAssets/S_ItemInfo.h"
 
-#include "DebugHelper.h"
+void UItemInventoryComponentBase::BeginPlay()
+{
+    Super::BeginPlay();
+
+    CategorizedItems.FindOrAdd(EItemCategory::Usable);
+    CategorizedItems.FindOrAdd(EItemCategory::Quest);
+    CategorizedItems.FindOrAdd(EItemCategory::ReadOnly);
+}
 
 bool UItemInventoryComponentBase::AddItem(FName NewItem)
 {
     if (!ItemDataTable)
     {
-        Debug::Print(TEXT("Data Table is not allocated"));
+        UE_LOG(LogTemp, Display, TEXT("ItemTable Not Allocated"));
         return false;
     }
 
@@ -24,14 +31,6 @@ bool UItemInventoryComponentBase::AddItem(FName NewItem)
 
         // 실시간 업데이트 필요시 델리게이트 정의
         // OnInventoryUpdated.Broadcast(NewItem);
-
-        Debug::Print((TEXT("Items acquired : %s"), *ItemData->ItemName.ToString()));
-
-        Debug::Print(TEXT("Inventory now on"));
-        for (auto item : InventorySection)
-        {
-            Debug::Print((TEXT("&s"), item.ToString()));
-        }
 
         return true;
     }
@@ -73,14 +72,4 @@ FS_Item UItemInventoryComponentBase::BP_GetItemData(FName ItemID, bool& bSuccess
 
     return bSuccess ? *FoundData : FS_Item();
 }
-
-void UItemInventoryComponentBase::BeginPlay()
-{
-    Super::BeginPlay();
-
-    CategorizedItems.FindOrAdd(EItemCategory::Usable);
-    CategorizedItems.FindOrAdd(EItemCategory::Quest);
-    CategorizedItems.FindOrAdd(EItemCategory::ReadOnly);
-}
-
 

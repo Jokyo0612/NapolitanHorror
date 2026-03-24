@@ -4,8 +4,6 @@
 #include "Items/NPItemBase.h"
 #include "Components/BoxComponent.h"
 
-#include "DebugHelper.h"
-
 // Sets default values
 ANPItemBase::ANPItemBase()
 {
@@ -28,6 +26,5 @@ ANPItemBase::ANPItemBase()
 
 void ANPItemBase::Interact_Implementation(AActor* Interactor)
 {
-	Debug::Print(TEXT("Interact Succeed"));
 	return;
 }

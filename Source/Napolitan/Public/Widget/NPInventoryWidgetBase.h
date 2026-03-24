@@ -54,4 +54,7 @@ protected:
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Refresh Item Slots"))
 	void RefreshInventory();
 
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Handle Clicked Button Event"))
+	void HandleSlotClick(const FS_Item& ItemData);
+
 };
