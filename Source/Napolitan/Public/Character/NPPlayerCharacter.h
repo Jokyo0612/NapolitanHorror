@@ -17,6 +17,7 @@ class USpotLightComponent;
 class UDataAsset_InputConfig;
 class UPawnUIComponent;
 class UPlayerUIComponent;
+class UNarrationalUIComponent;
 
 /**
  * 
@@ -50,6 +51,9 @@ class NAPOLITAN_API ANPPlayerCharacter : public ANPBaseCharacter, public IIntera
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI", meta = (AllowPrivateAccess = "true"))
 	UPlayerUIComponent* PlayerUIComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI", meta = (AllowPrivateAccess = "true"))
+	UNarrationalUIComponent* NarrationComponent;
 
 protected:
 
@@ -172,9 +176,13 @@ protected:
 	/** Called while sprinting at a fixed time interval */
 	void SprintFixedTick();
 
-	/** Go to Next Event Talk or Phone */
+	/** Go to Next Event Talk */
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void Next_Sentence();
+
+	/** Get a Phone Call */
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void Get_Phone();
 
 #pragma endregion
 
@@ -208,5 +216,10 @@ protected:
 	float UICallCooldown = 1.5f;
 
 #pragma endregion
+
+#pragma region Subscribe
+public:
+	virtual UNarrationalUIComponent* GetNarrationUIComponent() const override;
+
 };
 

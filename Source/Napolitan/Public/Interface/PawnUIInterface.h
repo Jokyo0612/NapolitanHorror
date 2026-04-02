@@ -8,6 +8,7 @@
 
 class UPawnUIComponent;
 class UPlayerUIComponent;
+class UNarrationalUIComponent;
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
@@ -27,4 +28,6 @@ public:
 	virtual UPawnUIComponent* GetPawnUIComponent() const = 0;
 
 	virtual UPlayerUIComponent* GetPlayerUIComponent() const;
+
+	virtual UNarrationalUIComponent* GetNarrationUIComponent() const;
 };

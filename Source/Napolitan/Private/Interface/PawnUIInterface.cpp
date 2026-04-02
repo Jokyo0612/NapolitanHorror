@@ -9,3 +9,8 @@ UPlayerUIComponent* IPawnUIInterface::GetPlayerUIComponent() const
 {
 	return nullptr;
 }
+
+UNarrationalUIComponent* IPawnUIInterface::GetNarrationUIComponent() const
+{
+	return nullptr;
+}

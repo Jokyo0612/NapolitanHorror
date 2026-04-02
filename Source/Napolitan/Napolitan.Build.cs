@@ -26,8 +26,6 @@ public class Napolitan : ModuleRules
 
 		PublicIncludePaths.AddRange(new string[] {
 			"Napolitan",
-			"Napolitan/Variant_Horror",
-			"Napolitan/Variant_Horror/UI",
 		});
 
 		// Uncomment if you are using Slate UI

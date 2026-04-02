@@ -19,6 +19,8 @@
 #include "Components/Input/NPInputComponent.h"
 #include "Components/Items/ItemInventoryComponentBase.h"
 #include "Components/UI/PlayerUIComponent.h"
+#include "Components/UI/NarrationalUIComponent.h"
+#include "Components/AudioComponent.h"
 #include "NPGameplayTag.h"
 
 #include "DebugHelper.h"
@@ -80,6 +82,12 @@ ANPPlayerCharacter::ANPPlayerCharacter()
 	// Inventory
 	PlayerInventoryComponent = CreateDefaultSubobject<UItemInventoryComponentBase>(TEXT("PlayerInventoryComponent"));
 	PlayerUIComponent = CreateDefaultSubobject<UPlayerUIComponent>(TEXT("PlayerUIComponent"));
+
+	// Subscribe Bar
+	NarrationComponent = CreateDefaultSubobject<UNarrationalUIComponent>(TEXT("NarrationComponent"));
+	NarrationComponent->PhoneAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("PhoneAudioComponent"));
+	NarrationComponent->PhoneAudioComponent->SetupAttachment(GetRootComponent());
+	NarrationComponent->PhoneAudioComponent->bAutoActivate = false;
 }
 
 void ANPPlayerCharacter::BeginPlay()
@@ -160,8 +168,11 @@ void ANPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	// Inventory
 	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_ItemListCall, ETriggerEvent::Started, this, &ThisClass::ItemListCall);
 
-	// Phone & Narration Bar
+	// Narration Bar
 	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_NextSentence, ETriggerEvent::Started, this, &ThisClass::Next_Sentence);
+
+	// Get Phone Call
+	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_PhoneCall, ETriggerEvent::Started, this, &ThisClass::Get_Phone);
 }
 
 
@@ -355,9 +366,16 @@ void ANPPlayerCharacter::SprintFixedTick()
 
 void ANPPlayerCharacter::Next_Sentence()
 {
-	// Need to implement event based interaction key
+	NarrationComponent->SkipSub.Broadcast();
 
-	Debug::Print(TEXT("Pressed Phone / Event Interaction Button"));
+	Debug::Print(TEXT("Pressed Narration Button"));
+}
+
+void ANPPlayerCharacter::Get_Phone()
+{
+	NarrationComponent->CallApprove.Broadcast();
+
+	Debug::Print(TEXT("Pressed Phone Button"));
 }
 
 void ANPPlayerCharacter::PerformInteractionCheck()
@@ -432,4 +450,9 @@ void ANPPlayerCharacter::ItemListCall()
 
 		PlayerUIComponent->OnInventoryCalled.Broadcast();
 	}
+}
+
+UNarrationalUIComponent* ANPPlayerCharacter::GetNarrationUIComponent() const
+{
+	return NarrationComponent;
 }

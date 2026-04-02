@@ -14,10 +14,13 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Interact, "InputTag.Interact");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_ItemListCall, "InputTag.ItemListCall");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_NextSentence, "InputTag.NextSentence");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_PhoneCall, "InputTag.PhoneCall");
 
 	/** Chapter Tags */
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_Option_MainMenu, "Chapter.Option.MainMenu");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_Room, "Chapter.00.Room");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_Warehouse, "Chapter.00.Warehouse");
-	
+
+	/** Call Tags */
+	UE_DEFINE_GAMEPLAY_TAG(Call_00_Tutorial, "Call.00.Tutorial");
 }
