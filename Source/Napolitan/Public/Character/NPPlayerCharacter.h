@@ -197,6 +197,8 @@ protected:
 
 	void Interact();
 
+	void SetHighlight(AActor* InActor, bool bEnable);
+
 #pragma endregion
 
 #pragma region UI_Inventory

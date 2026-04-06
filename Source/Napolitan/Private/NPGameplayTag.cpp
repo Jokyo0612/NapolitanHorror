@@ -23,4 +23,8 @@ namespace NPGamplayTags
 
 	/** Call Tags */
 	UE_DEFINE_GAMEPLAY_TAG(Call_00_Tutorial, "Call.00.Tutorial");
+
+	/** States Tags */
+	UE_DEFINE_GAMEPLAY_TAG(State_Call_Busy, "State.Call.Busy");
+	UE_DEFINE_GAMEPLAY_TAG(State_Call_Allow, "State.Call.Allow");
 }

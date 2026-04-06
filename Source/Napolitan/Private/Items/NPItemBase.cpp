@@ -10,6 +10,8 @@ ANPItemBase::ANPItemBase()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
+	ItemMesh->bRenderCustomDepth = true;
+	ItemMesh->CustomDepthStencilValue = 1;
 	SetRootComponent(ItemMesh);
 
 	ItemCollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("ItemCollisionBox"));

@@ -18,5 +18,5 @@ protected:
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
 	UFUNCTION(BlueprintCallable)
-	void EndTutorial(APlayerController* PC);
+	void EndTutorialWidget(APlayerController* PC);
 };

@@ -22,4 +22,8 @@ namespace NPGamplayTags
 
 	/** Call Tags */
 	NAPOLITAN_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Call_00_Tutorial);
+
+	/** States Tags */
+	NAPOLITAN_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Call_Busy);
+	NAPOLITAN_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Call_Allow);
 }

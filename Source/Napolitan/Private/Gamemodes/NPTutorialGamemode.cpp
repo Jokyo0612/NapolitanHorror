@@ -21,7 +21,7 @@ void ANPTutorialGamemode::PostLogin(APlayerController* NewPlayer)
     }
 }
 
-void ANPTutorialGamemode::EndTutorial(APlayerController* PC)
+void ANPTutorialGamemode::EndTutorialWidget(APlayerController* PC)
 {
     if (PC && PC->GetPawn())
     {

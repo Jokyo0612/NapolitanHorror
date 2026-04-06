@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "NPGameplayTag.h"
 #include "NPBaseGamemode.generated.h"
 
 UENUM(BlueprintType)
@@ -17,6 +18,8 @@ enum class ENPGameState : uint8
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameStateChanged, ENPGameState, CurrentState);
 
+class UNarrationalUIComponent;
+
 /**
  * 
  */
@@ -28,6 +31,12 @@ class NAPOLITAN_API ANPBaseGamemode : public AGameModeBase
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
+
+	UFUNCTION(BlueprintCallable)
+	virtual void EndChapter(FGameplayTag NextChapter);
+
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning NarrtionUIComponent Initialized"))
+	void BP_OnOwningNarrtionUIComponentInitialized(UNarrationalUIComponent* OwningPlayerComponent);
 
 private:
 	void SetCurrentGameState(ENPGameState NewState);
