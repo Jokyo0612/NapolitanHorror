@@ -3,13 +3,6 @@
 
 #include "NPGameInstance.h"
 
-void UNPGameInstance::Init()
-{
-	Super::Init();
-
-	// Implement to load last data from save game
-}
-
 TSoftObjectPtr<UWorld> UNPGameInstance::GetLevelForChapter(FGameplayTag ChapterTag) const
 {
 	for (const FNPChapterData& Chapter : ChapterData)
@@ -25,7 +18,7 @@ TSoftObjectPtr<UWorld> UNPGameInstance::GetLevelForChapter(FGameplayTag ChapterT
 	return TSoftObjectPtr<UWorld>();
 }
 
-void UNPGameInstance::SetCurrentChapter(const FGameplayTag& ChapterTag)
+void UNPGameInstance::SetCurrentChapter(FGameplayTag ChapterTag)
 {
 	if (CurrentChapter != ChapterTag)
 	{

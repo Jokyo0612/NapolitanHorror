@@ -32,8 +32,13 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
 
+	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
+
 	UFUNCTION(BlueprintCallable)
 	virtual void EndChapter(FGameplayTag NextChapter);
+
+	UFUNCTION(BlueprintCallable)
+	void SaveGameInstance();
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning NarrtionUIComponent Initialized"))
 	void BP_OnOwningNarrtionUIComponentInitialized(UNarrationalUIComponent* OwningPlayerComponent);

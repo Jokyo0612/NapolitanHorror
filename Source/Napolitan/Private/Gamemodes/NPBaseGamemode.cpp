@@ -6,6 +6,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/UI/NarrationalUIComponent.h"
 #include "NPGameInstance.h"
+#include "NPFunctionLibrary.h"
+#include "EngineUtils.h"
+#include "GameFramework/PlayerStart.h"
 
 void ANPBaseGamemode::BeginPlay()
 {
@@ -27,6 +30,27 @@ void ANPBaseGamemode::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 }
 
+AActor* ANPBaseGamemode::ChoosePlayerStart_Implementation(AController* Player)
+{
+	FString TargetTag = UNPFunctionLibrary::GetNPGameInstance(GetWorld())->GetCurrentChapter().ToString();
+
+	for (TActorIterator<APlayerStart> It(GetWorld()); It; ++It)
+	{
+		APlayerStart* Start = *It;
+		if (Start && Start->PlayerStartTag.ToString() == TargetTag)
+		{
+			return Start;
+		}
+	}
+
+	return Super::ChoosePlayerStart_Implementation(Player);
+}
+
+void ANPBaseGamemode::SaveGameInstance()
+{
+	UNPFunctionLibrary::SaveInventoryToInstance(this);
+}
+
 void ANPBaseGamemode::EndChapter(FGameplayTag NextChapter)
 {
 	UNPGameInstance* InstanceProgress = GetGameInstance<UNPGameInstance>();
@@ -34,6 +58,8 @@ void ANPBaseGamemode::EndChapter(FGameplayTag NextChapter)
 
 	InstanceProgress->SetCurrentChapter(NextChapter);
 	TSoftObjectPtr<UWorld> NextLevelPtr = InstanceProgress->GetLevelForChapter(NextChapter);
+
+	SaveGameInstance();
 
 	if (!NextLevelPtr.IsNull())
 	{

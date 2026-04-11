@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "NPGameplayTag.h"
+#include "Components/Items/ItemInventoryComponentBase.h"
 #include "NPGameInstance.generated.h"
 
 USTRUCT(BlueprintType)
@@ -34,21 +35,22 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Game Data")
 	TArray<FNPChapterData> ChapterData;
 
-private:
+public:
 	UPROPERTY(VisibleAnywhere, Category = "Game Instance")
 	TArray<FGameplayTag> EventOccurred;
 
 	UPROPERTY(VisibleAnywhere, Category = "Game Instance")
 	FGameplayTag CurrentChapter;
 
-	virtual void Init() override;
+	UPROPERTY(VisibleAnywhere, Category = "Game Instance")
+	TMap<EItemCategory, FInventoryArray> InventoryInstance;
 
 public:
 	UFUNCTION(BlueprintPure, Category = "Game Data", meta = (GameplayTagFilter = "Chapter"))
 	TSoftObjectPtr<UWorld> GetLevelForChapter(FGameplayTag ChapterTag) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Game Instance")
-	void SetCurrentChapter(const FGameplayTag& ChapterTag);
+	void SetCurrentChapter(FGameplayTag ChapterTag);
 
 	UFUNCTION(BlueprintPure, Category = "Game Instance")
 	FGameplayTag GetCurrentChapter() const;

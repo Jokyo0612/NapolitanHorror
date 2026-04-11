@@ -3,14 +3,22 @@
 
 #include "Components/Items/ItemInventoryComponentBase.h"
 #include "DataAssets/S_ItemInfo.h"
+#include "NPGameInstance.h"
+#include "NPFunctionLibrary.h"
 
 void UItemInventoryComponentBase::BeginPlay()
 {
     Super::BeginPlay();
 
+    if (UNPGameInstance* GI = UNPFunctionLibrary::GetNPGameInstance(this))
+    {
+        CategorizedItems = GI->InventoryInstance;
+    }
+
     CategorizedItems.FindOrAdd(EItemCategory::Usable);
     CategorizedItems.FindOrAdd(EItemCategory::Quest);
     CategorizedItems.FindOrAdd(EItemCategory::ReadOnly);
+
 }
 
 bool UItemInventoryComponentBase::AddItem(FName NewItem)
@@ -71,5 +79,10 @@ FS_Item UItemInventoryComponentBase::BP_GetItemData(FName ItemID, bool& bSuccess
     bSuccess = (FoundData != nullptr);
 
     return bSuccess ? *FoundData : FS_Item();
+}
+
+TMap<EItemCategory, FInventoryArray> UItemInventoryComponentBase::SaveInventory() const
+{
+    return CategorizedItems;
 }
 

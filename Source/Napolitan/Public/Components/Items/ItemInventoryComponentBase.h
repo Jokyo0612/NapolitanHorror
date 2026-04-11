@@ -36,6 +36,8 @@ public:
     UFUNCTION(BlueprintPure, Category = "Inventory")
     FS_Item BP_GetItemData(FName ItemID, bool& bSuccess) const;
 
+	TMap<EItemCategory, FInventoryArray> SaveInventory() const;
+
 protected:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory")
     TObjectPtr<UDataTable> ItemDataTable;
