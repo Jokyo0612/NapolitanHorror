@@ -395,53 +395,25 @@ void ANPPlayerCharacter::PerformInteractionCheck()
 	bool bHit = GetWorld()->LineTraceSingleByChannel(
 		HitResult, EyesLocation, TraceEnd, ECC_Visibility, QueryParams);
 
-	AActor* NewTarget = nullptr;
-
 	if (bHit)
 	{
 		AActor* HitActor = HitResult.GetActor();
 		// 3. 맞은 액터가 인터페이스를 가지고 있는지 확인
 		if (HitActor && HitActor->GetClass()->ImplementsInterface(UInteractInterface::StaticClass()))
 		{
-			NewTarget = HitActor;
+			if (TargetActor != HitActor)
+			{
+				TargetActor = HitActor;
+				PlayerUIComponent->OnInteractIconCalled.Broadcast();
+			}
+			return;
 		}
 	}
 
-	if (TargetActor != NewTarget)
+	if (TargetActor)
 	{
-		if (TargetActor)
-		{
-			SetHighlight(TargetActor, false);
-		}
-
-		if (NewTarget)
-		{
-			SetHighlight(NewTarget, true);
-
-			PlayerUIComponent->OnInteractIconCalled.Broadcast();
-		}
-		else { PlayerUIComponent->OnInteractIconRemove.Broadcast(); }
-
-		TargetActor = NewTarget;
-	}
-}
-
-void ANPPlayerCharacter::SetHighlight(AActor* InActor, bool bEnable)
-{
-	if (!InActor) return;
-
-	// 액터 내의 모든 프리미티브 컴포넌트(Mesh 등)를 찾아서 CustomDepth를 켭니다.
-	TArray<UPrimitiveComponent*> Components;
-	InActor->GetComponents<UPrimitiveComponent>(Components);
-
-	for (UPrimitiveComponent* Comp : Components)
-	{
-		if (Comp)
-		{
-			Comp->SetRenderCustomDepth(bEnable);
-			// 스텐실 값(예: 1)을 설정하여 특정 색상의 테두리를 입힐 수도 있습니다.
-			Comp->SetCustomDepthStencilValue(bEnable ? 1 : 0);
-		}
+		PlayerUIComponent->OnInteractIconRemove.Broadcast();
+		TargetActor = nullptr;
 	}
 }
 

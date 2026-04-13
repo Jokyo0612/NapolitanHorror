@@ -31,8 +31,13 @@ class NAPOLITAN_API ANPBaseGamemode : public AGameModeBase
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
+	
+#pragma region Chapter Management
 
 	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
+
+	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject"))
+	static void TeleportToPlayerStart(const UObject* WorldContextObject, FName TargetTag);
 
 	UFUNCTION(BlueprintCallable)
 	virtual void EndChapter(FGameplayTag NextChapter);
@@ -40,15 +45,22 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void SaveGameInstance();
 
+#pragma endregion
+
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning NarrtionUIComponent Initialized"))
 	void BP_OnOwningNarrtionUIComponentInitialized(UNarrationalUIComponent* OwningPlayerComponent);
 
-private:
+
+#pragma region Game State
+
 	void SetCurrentGameState(ENPGameState NewState);
 
+private:
 	UPROPERTY()
 	ENPGameState CurrentGameState;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameStateChanged OnGameStateChanged;
+
+#pragma endregion
 };

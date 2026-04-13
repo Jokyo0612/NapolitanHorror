@@ -20,9 +20,13 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_Option_MainMenu, "Chapter.Option.MainMenu");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_Room, "Chapter.00.Room");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_Warehouse, "Chapter.00.Warehouse");
+	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_MonitorRoom, "Chapter.00.MonitorRoom");
 
 	/** Call Tags */
 	UE_DEFINE_GAMEPLAY_TAG(Call_00_Tutorial, "Call.00.Tutorial");
+
+	/** Subscribes Tags */
+	UE_DEFINE_GAMEPLAY_TAG(Sub_00_GuideMet, "Sub.00.GuideMet");
 
 	/** States Tags */
 	UE_DEFINE_GAMEPLAY_TAG(State_Call_Busy, "State.Call.Busy");

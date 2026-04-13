@@ -46,6 +46,30 @@ AActor* ANPBaseGamemode::ChoosePlayerStart_Implementation(AController* Player)
 	return Super::ChoosePlayerStart_Implementation(Player);
 }
 
+void ANPBaseGamemode::TeleportToPlayerStart(const UObject* WorldContextObject, FName TargetTag)
+{
+	UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull);
+	if (!World) return;
+
+	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(World, 0);
+	if (!PlayerPawn) return;
+
+	for (TActorIterator<APlayerStart> It(World); It; ++It)
+	{
+		APlayerStart* Start = *It;
+
+		if (Start && Start->PlayerStartTag == TargetTag)
+		{
+			PlayerPawn->SetActorLocationAndRotation(
+				Start->GetActorLocation(),
+				Start->GetActorRotation(),
+				false, nullptr, ETeleportType::TeleportPhysics
+			);
+			return;
+		}
+	}
+}
+
 void ANPBaseGamemode::SaveGameInstance()
 {
 	UNPFunctionLibrary::SaveInventoryToInstance(this);
