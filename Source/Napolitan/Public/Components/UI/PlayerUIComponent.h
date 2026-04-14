@@ -8,9 +8,6 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUICalled);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInteractIconCalled);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInteractIconRemove);
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateSprintMeterDelegate, float, Percentage);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSprintStateChangedDelegate, bool, bSprinting);
 /**
@@ -24,12 +21,6 @@ class NAPOLITAN_API UPlayerUIComponent : public UPawnUIComponent
 public:
 	UPROPERTY(BlueprintAssignable)
 	FOnInventoryUICalled OnInventoryCalled;
-
-	UPROPERTY(BlueprintAssignable)
-	FOnInteractIconCalled OnInteractIconCalled;
-
-	UPROPERTY(BlueprintAssignable)
-	FOnInteractIconRemove OnInteractIconRemove;
 	
 	UPROPERTY(BlueprintAssignable)
 	FUpdateSprintMeterDelegate OnSprintMeterUpdated;

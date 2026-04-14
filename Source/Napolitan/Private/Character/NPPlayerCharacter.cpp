@@ -130,6 +130,22 @@ void ANPPlayerCharacter::Tick(float DeltaTime)
 
 	float NewZ = FMath::FInterpTo(CurrentZ, TargetZ, DeltaTime, 7.0f);
 	CameraBoom->SetRelativeLocation(FVector(DefaultCameraLoc.X, DefaultCameraLoc.Y, NewZ));
+
+	if (GetCharacterMovement()->IsFalling())
+	{
+		if (GetVelocity().Z < 0.8f)
+		{
+			GetCharacterMovement()->GravityScale = 1.9f;
+		}
+		else
+		{
+			GetCharacterMovement()->GravityScale = 1.0f;
+		}
+	}
+	else
+	{
+		GetCharacterMovement()->GravityScale = 1.0f;
+	}
 }
 
 void ANPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -404,7 +420,6 @@ void ANPPlayerCharacter::PerformInteractionCheck()
 			if (TargetActor != HitActor)
 			{
 				TargetActor = HitActor;
-				PlayerUIComponent->OnInteractIconCalled.Broadcast();
 			}
 			return;
 		}
@@ -412,7 +427,6 @@ void ANPPlayerCharacter::PerformInteractionCheck()
 
 	if (TargetActor)
 	{
-		PlayerUIComponent->OnInteractIconRemove.Broadcast();
 		TargetActor = nullptr;
 	}
 }
@@ -422,8 +436,6 @@ void ANPPlayerCharacter::Interact()
 	// 현재 타겟이 있고, 실제로 E키를 눌렀을 때만 발동
 	if (TargetActor)
 	{
-		PlayerUIComponent->OnInteractIconRemove.Broadcast();
-
 		IInteractInterface::Execute_Interact(TargetActor, this);
 		Debug::Print((TEXT("%s"), TargetActor->GetActorNameOrLabel()));
 	}
