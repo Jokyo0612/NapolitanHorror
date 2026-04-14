@@ -9,19 +9,8 @@
 
 class UItemInventoryComponentBase;
 class UNPInvSlotWidget;
-class UPanelWidget;
+enum class EItemCategory : uint8;
 
-USTRUCT(BlueprintType)
-struct FInventorySectionData
-{
-	GENERATED_BODY()
-
-	UPROPERTY()
-	TObjectPtr<UPanelWidget> Container;
-
-	UPROPERTY()
-	TArray<TObjectPtr<UNPInvSlotWidget>> InvSlots;
-};
 /**
  * 
  */
@@ -39,20 +28,17 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	TObjectPtr<UItemInventoryComponentBase> PlayerInventoryComponent;
 
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UPanelWidget> UsableSlotContainer;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UPanelWidget> QuestSlotContainer;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UPanelWidget> ReadOnlySlotContainer;
+	UPROPERTY()
+	TArray<TObjectPtr<UNPInvSlotWidget>> InvSlots;
 
 	UPROPERTY()
-	TMap<EItemCategory, FInventorySectionData> InventorySections;
+	EItemCategory CurrentViewCategory;
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Refresh Item Slots"))
 	void RefreshInventory();
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Handle Tab Button Clicked"))
+	void OnTabButtonClicked(EItemCategory Category);
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Handle Clicked Button Event"))
 	void HandleSlotClick(const FS_Item& ItemData);

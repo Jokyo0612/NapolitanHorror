@@ -10,12 +10,6 @@ void UNPInvSlotWidget::UpdateSlot(FName NewItemID, FS_Item* ItemData)
 {
     CurrentItemID = NewItemID;
 
-    if (CurrentItemID.IsNone())
-    {
-        SetVisibility(ESlateVisibility::Collapsed);
-        return;
-    }
-
     FS_Item* Data = ItemData;
     if (Data)
     {

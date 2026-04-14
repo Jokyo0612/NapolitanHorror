@@ -5,8 +5,8 @@
 #include "Interface/InventoryInterface.h"
 #include "Components/Items/ItemInventoryComponentBase.h"
 #include "DataAssets/S_ItemInfo.h"
-#include "Components/PanelWidget.h"
 #include "Widget/NPInvSlotWidget.h"
+#include "Blueprint/WidgetTree.h"
 
 void UNPInventoryWidgetBase::NativeOnInitialized()
 {
@@ -20,65 +20,43 @@ void UNPInventoryWidgetBase::NativeOnInitialized()
 		}
 	}
 
-    InventorySections.Add(EItemCategory::Usable, { UsableSlotContainer });
-    InventorySections.Add(EItemCategory::Quest, { QuestSlotContainer });
-    InventorySections.Add(EItemCategory::ReadOnly, { ReadOnlySlotContainer });
-
-    for (auto& Pair : InventorySections)
+    if (WidgetTree)
     {
-        if (Pair.Value.Container)
+        WidgetTree->ForEachWidget([this](UWidget* Widget)
         {
-            for (UWidget* Child : Pair.Value.Container->GetAllChildren())
+            if (UNPInvSlotWidget* NewSlot = Cast<UNPInvSlotWidget>(Widget))
             {
-                if (UNPInvSlotWidget* NewSlot = Cast<UNPInvSlotWidget>(Child))
-                {
-                    Pair.Value.InvSlots.Add(NewSlot);
-
-                    NewSlot->OnSlotClicked.AddDynamic(this, &UNPInventoryWidgetBase::HandleSlotClick);
-                }
+                InvSlots.Add(NewSlot);
+                NewSlot->OnSlotClicked.AddDynamic(this, &UNPInventoryWidgetBase::HandleSlotClick);
             }
-        }
+        });
     }
+
 }
 
 void UNPInventoryWidgetBase::RefreshInventory()
 {
     if (!PlayerInventoryComponent) return;
 
-    const TArray<EItemCategory> MainCategory = {
-        EItemCategory::Usable,
-        EItemCategory::Quest,
-        EItemCategory::ReadOnly
-    };
+    const TArray<FName>& Items = PlayerInventoryComponent->GetItems(CurrentViewCategory);
 
-    for (const EItemCategory Category : MainCategory)
+    for (int32 i = 0; i < InvSlots.Num(); ++i)
     {
-        const TArray<FName>& Items = PlayerInventoryComponent->GetItems(Category);
-
-        if (!InventorySections.Contains(Category))
+        if (Items.IsValidIndex(i))
         {
-            UE_LOG(LogTemp, Warning, TEXT("Category %d not found in InventorySections!"), (int32)Category);
-            continue;
+            const FName& ItemID = Items[i];
+            InvSlots[i]->UpdateSlot(ItemID, PlayerInventoryComponent->GetItemData(ItemID));
+            InvSlots[i]->SetVisibility(ESlateVisibility::Visible);
         }
-
-        auto& Section = InventorySections[Category];
-
-        int32 SlotIdx = 0;
-
-        for (const FName& ItemID : Items)
+        else
         {
-            if (Section.InvSlots.IsValidIndex(SlotIdx))
-            {
-                Section.InvSlots[SlotIdx]->UpdateSlot(ItemID, PlayerInventoryComponent->GetItemData(ItemID));
-                Section.InvSlots[SlotIdx]->SetVisibility(ESlateVisibility::Visible);
-                SlotIdx++;
-            }
-        }
-
-        for (int32 i = SlotIdx; i < Section.InvSlots.Num(); ++i)
-        {
-            Section.InvSlots[i]->SetVisibility(ESlateVisibility::Collapsed);
+            InvSlots[i]->SetVisibility(ESlateVisibility::Hidden);
         }
     }
 }
 
+void UNPInventoryWidgetBase::OnTabButtonClicked(EItemCategory NewCategory)
+{
+    CurrentViewCategory = NewCategory;
+    RefreshInventory();
+}

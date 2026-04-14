@@ -7,10 +7,9 @@
 UENUM(BlueprintType)
 enum class EItemCategory : uint8
 {
-    Usable      UMETA(DisplayName = "Usable Item"),
-    Quest       UMETA(DisplayName = "Quest Item"),
-    ReadOnly    UMETA(DisplayName = "Read Only"),
-    Equipment   UMETA(DisplayName = "Equipment")
+	Usable      UMETA(DisplayName = "Usable Item"), // 사용 가능한 아이템 (예: 회복 아이템, 버프 아이템 등)
+	Quest       UMETA(DisplayName = "Quest Item"),  // 퀘스트 관련 아이템 (예: 열쇠, 퀘스트 아이템 등)
+	ReadOnly    UMETA(DisplayName = "Read Only")    // 읽기 전용 아이템 (예: 수집품, 장식 아이템 등) 
 };
 
 USTRUCT(BlueprintType)
