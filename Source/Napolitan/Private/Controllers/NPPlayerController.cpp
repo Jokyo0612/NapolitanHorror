@@ -22,7 +22,7 @@ void ANPPlayerController::OnPossess(APawn* aPawn)
 			if (!DefaultUI)
 			{
 				DefaultUI = CreateWidget<UNPWidgetBase>(this, DefaultUIClass);
-				DefaultUI->AddToViewport(0);
+				DefaultUI->AddToViewport(5);
 			}
 		}
 	}

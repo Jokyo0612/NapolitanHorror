@@ -27,11 +27,14 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "UI")
 	TObjectPtr<UWidgetComponent> InteractIconWidget;
 
+	UPROPERTY(EditAnywhere, Category = "UI")
+	float IconZOffset = 20.f;
+
 	UPROPERTY(VisibleAnywhere, Category = "UI")
 	TObjectPtr<USphereComponent> DetectSphere;
 
 	UPROPERTY(EditAnywhere, Category = "UI")
-	float InteractIconZOffset = 200.0f;
+	float SphereRadius = 800.f;
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 

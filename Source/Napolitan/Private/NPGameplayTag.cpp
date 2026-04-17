@@ -26,6 +26,8 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Call_00_Tutorial, "Call.00.Tutorial");
 
 	/** Subscribes Tags */
+	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Room, "Sub.00.Room");
+	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Room2, "Sub.00.Room2");
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_GuideMet, "Sub.00.GuideMet");
 
 	/** States Tags */

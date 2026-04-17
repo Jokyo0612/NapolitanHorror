@@ -19,6 +19,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNarrationOn, const FS_Dialogue&, Ev
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNarrationEnded, const FGameplayTag&, Event_Tag);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCallHappened, FGameplayTag, CallNum, float, PlayTime);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnQuestUpdated, FString, SubTitles, float, PlayTime);
 /**
  * 
  */
@@ -45,6 +47,9 @@ public:
 #pragma endregion
 
 #pragma region Narration Events
+	
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnQuestUpdated OnQuestUpdated;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FNarrationOn NarrationOn;

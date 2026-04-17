@@ -30,7 +30,7 @@ ANPItemBase::ANPItemBase()
 	// Detection Sphere
 	DetectSphere = CreateDefaultSubobject<USphereComponent>(TEXT("DetectSphere"));
 	DetectSphere->SetupAttachment(RootComponent);
-	DetectSphere->SetSphereRadius(800.0f);
+	DetectSphere->SetSphereRadius(SphereRadius);
 
 	InteractIconWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractIcon"));
 	InteractIconWidget->SetupAttachment(RootComponent);
@@ -50,7 +50,7 @@ void ANPItemBase::OnConstruction(const FTransform& Transform)
 	{
 		float BoxHalfHeight = ItemCollisionBox->GetScaledBoxExtent().Z;
 		float BoxTopZ = ItemCollisionBox->GetRelativeLocation().Z + BoxHalfHeight;
-		float FinalOffset = BoxTopZ + 10.0f;
+		float FinalOffset = BoxTopZ + IconZOffset;
 
 		InteractIconWidget->SetRelativeLocation(FVector(0.f, 0.f, FinalOffset));
 	}
