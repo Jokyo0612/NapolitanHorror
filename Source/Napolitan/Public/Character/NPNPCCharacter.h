@@ -9,6 +9,9 @@
 
 class UNarrationalUIComponent;
 class UItemInventoryComponentBase;
+class UInteractUIComponent;
+class UBoxComponent;
+class UStaticMeshComponent;
 
 /**
  * 
@@ -18,11 +21,19 @@ class NAPOLITAN_API ANPNPCCharacter : public ANPBaseCharacter, public IInteractI
 {
 	GENERATED_BODY()
 
+public:
+	ANPNPCCharacter();
+
 protected:
 	void Interact_Implementation(AActor* Interactor) override;
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On NPC Interact Event"))
 	void BP_OnNPCInteractionCalled(UNarrationalUIComponent* OwningPlayerComponent, UItemInventoryComponentBase* Inv);
 	
-	bool bInteractable = true;
+	UPROPERTY(VisibleAnywhere, Category = "Interaction")
+	TObjectPtr<class UInteractUIComponent> InteractionHandler;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UBoxComponent> ItemCollisionBox;
+
 };

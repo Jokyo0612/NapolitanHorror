@@ -4,10 +4,11 @@
 #include "Items/NPItem_Getable.h"
 #include "Interface/InventoryInterface.h"
 #include "Components/Items/ItemInventoryComponentBase.h"
+#include "Components/InteractUIComponent.h"
 
 void ANPItem_Getable::Interact_Implementation(AActor* Interactor)
 {
-	if (!Interactor || ItemHandle.IsNull()) return;
+	if (!Interactor || ItemHandle.IsNull() || !InteractionHandler->bInteractable) return;
 
 	if (IInventoryInterface* PawnInventoryInterface = Cast<IInventoryInterface>(Interactor))
 	{

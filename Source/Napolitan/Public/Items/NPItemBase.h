@@ -9,8 +9,8 @@
 #include "NPItemBase.generated.h"
 
 class UBoxComponent;
-class UWidgetComponent;
-class USphereComponent;
+class UStaticMeshComponent;
+class UInteractUIComponent;
 
 UCLASS()
 class NAPOLITAN_API ANPItemBase : public AActor, public IInteractInterface
@@ -24,25 +24,8 @@ protected:
 
 #pragma region Interaction UI
 
-	UPROPERTY(VisibleAnywhere, Category = "UI")
-	TObjectPtr<UWidgetComponent> InteractIconWidget;
-
-	UPROPERTY(EditAnywhere, Category = "UI")
-	float IconZOffset = 20.f;
-
-	UPROPERTY(VisibleAnywhere, Category = "UI")
-	TObjectPtr<USphereComponent> DetectSphere;
-
-	UPROPERTY(EditAnywhere, Category = "UI")
-	float SphereRadius = 800.f;
-
-	virtual void OnConstruction(const FTransform& Transform) override;
-
-	UFUNCTION()
-	void OnDetectBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnDetectEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	UPROPERTY(VisibleAnywhere, Category = "Interaction")
+	TObjectPtr<class UInteractUIComponent> InteractionHandler;
 
 #pragma endregion
 

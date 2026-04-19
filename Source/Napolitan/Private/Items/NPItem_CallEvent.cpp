@@ -3,10 +3,11 @@
 
 #include "Items/NPItem_CallEvent.h"
 #include "Interface/PawnUIInterface.h"
+#include "Components/InteractUIComponent.h"
 
 void ANPItem_CallEvent::Interact_Implementation(AActor* Interactor)
 {
-	if (!Interactor) return;
+	if (!Interactor || !InteractionHandler->bInteractable) return;
 
 	if (IPawnUIInterface* PawnUIInterface = Cast<IPawnUIInterface>(Interactor))
 	{

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "CoreMinimal.h"
+#define LOG_SCREEN(Format, ...) Debug::Print(FString::Printf(TEXT(Format), ##__VA_ARGS__))
+
 namespace Debug {
 
 	static void Print(const FString& Msg, const FColor& Color = FColor::MakeRandomColor(), int32 InKey = -1)
