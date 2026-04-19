@@ -22,7 +22,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Napolitan|FunctionLibrary", meta = (WorldContext = "WorldContextObject"))
 	static UNPGameInstance* GetNPGameInstance(const UObject* WorldContextObject);
 
-	UFUNCTION(BlueprintCallable, Category = "Napolitan|FunctionLibrary")
+	UFUNCTION(BlueprintCallable, Category = "Napolitan|FunctionLibrary", meta = (WorldContext = "ContextActor"))
 	static void SaveInventoryToInstance(const AActor* ContextActor);
 
 #pragma endregion

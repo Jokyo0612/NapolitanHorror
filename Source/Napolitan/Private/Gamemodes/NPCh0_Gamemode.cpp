@@ -3,3 +3,7 @@
 
 #include "Gamemodes/NPCh0_Gamemode.h"
 
+void ANPCh0_Gamemode::BeginPlay()
+{
+	Super::BeginPlay();
+}

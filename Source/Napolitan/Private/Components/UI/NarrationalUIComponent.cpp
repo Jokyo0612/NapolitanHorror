@@ -22,7 +22,9 @@ void UNarrationalUIComponent::TriggerNarration(FName RowName)
 
         if (bAutoPlayNext)
         {
-            float CalculatedDuration = Data->GetDisplayDuration();
+            float CalculatedDuration = 0.f; 
+            if (Data->ManualDuration > 0.f) { CalculatedDuration = Data->ManualDuration;}
+            else { CalculatedDuration = Data->GetDisplayDuration();}
 
             if (!PendingNextRow.IsNone())
             {
@@ -34,12 +36,24 @@ void UNarrationalUIComponent::TriggerNarration(FName RowName)
                     false
                 );
             }
+            else 
+            {
+                FTimerDelegate TimerDelegate;
+                TimerDelegate.BindUObject(this, &UNarrationalUIComponent::EndCurrentDialogue, Data->CurrentDialogue);
+
+                GetWorld()->GetTimerManager().SetTimer(
+                    NarrationTimerHandle,
+                    TimerDelegate,
+                    CalculatedDuration,
+                    false
+                );
+            }
         }
         
     }
 }
 
-void UNarrationalUIComponent::SkipNarration()
+void UNarrationalUIComponent::SkipNarration(FGameplayTag EventTag)
 {
     GetWorld()->GetTimerManager().ClearTimer(NarrationTimerHandle);
 
@@ -47,11 +61,20 @@ void UNarrationalUIComponent::SkipNarration()
     {
 		PlayNextDialogue();
     }
+    else 
+    {
+		EndCurrentDialogue(EventTag);
+    }
 }
 
 void UNarrationalUIComponent::PlayNextDialogue()
 {
     TriggerNarration(PendingNextRow);
+}
+
+void UNarrationalUIComponent::EndCurrentDialogue(FGameplayTag EventTag)
+{
+	NarrationEnded.Broadcast(EventTag);
 }
 
 void UNarrationalUIComponent::StartSound()

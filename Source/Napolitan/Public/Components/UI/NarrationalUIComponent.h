@@ -19,8 +19,11 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNarrationOn, const FS_Dialogue&, Ev
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNarrationEnded, const FGameplayTag&, Event_Tag);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCallHappened, FGameplayTag, CallNum, float, PlayTime);
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnQuestUpdated, FString, SubTitles, float, PlayTime);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPopUpImageCalled,
+	TSoftObjectPtr<UTexture2D>, PopupImagePtr,
+	float, Duration);
 /**
  * 
  */
@@ -47,9 +50,6 @@ public:
 #pragma endregion
 
 #pragma region Narration Events
-	
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnQuestUpdated OnQuestUpdated;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FNarrationOn NarrationOn;
@@ -73,11 +73,13 @@ public:
 
 	void PlayNextDialogue();
 
+	void EndCurrentDialogue(FGameplayTag EventTag);
+
 	UFUNCTION(BlueprintCallable)
 	void TriggerNarration(FName RowName);
 
 	UFUNCTION(BlueprintCallable)
-	void SkipNarration();
+	void SkipNarration(FGameplayTag EventTag);
 
 #pragma endregion
 
@@ -98,5 +100,14 @@ protected:
 
 #pragma endregion
 
+#pragma region ETC Component
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnQuestUpdated OnQuestUpdated;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnPopUpImageCalled OnPopUpImageCalled;
+
+#pragma endregion
 	
 };

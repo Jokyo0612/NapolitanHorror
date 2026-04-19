@@ -14,4 +14,7 @@ class NAPOLITAN_API ANPCh0_Gamemode : public ANPBaseGamemode
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
+
 };
