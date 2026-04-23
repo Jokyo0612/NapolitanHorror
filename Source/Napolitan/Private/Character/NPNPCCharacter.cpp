@@ -22,6 +22,7 @@ ANPNPCCharacter::ANPNPCCharacter()
     // Camera Collision Ignore
     ItemCollisionBox->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 
+	// Interaction Icon and Detection Sphere
     InteractionHandler = CreateDefaultSubobject<UInteractUIComponent>(TEXT("InteractionHandler"));
 	InteractionHandler->SetupAttachment(RootComponent);
 }
@@ -49,4 +50,12 @@ void ANPNPCCharacter::Interact_Implementation(AActor* Interactor)
         }
     }
 
+}
+
+void ANPNPCCharacter::HideInteractionIcon()
+{
+    if (InteractionHandler)
+    {
+        InteractionHandler->HideIcon();
+	}
 }

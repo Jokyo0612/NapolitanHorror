@@ -55,6 +55,14 @@ void UInteractUIComponent::UpdateIconPosition()
     }
 }
 
+void UInteractUIComponent::HideIcon()
+{
+    if (InteractIconWidget)
+    {
+        InteractIconWidget->SetVisibility(false);
+	}
+}
+
 void UInteractUIComponent::OnDetectBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     if (OtherActor && OtherActor->IsA(APawn::StaticClass()))

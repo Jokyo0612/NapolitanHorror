@@ -45,6 +45,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void SaveGameInstance();
 
+	UFUNCTION(BlueprintCallable)
+	FGameplayTag ChapterStartManager();
+
 #pragma endregion
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning NarrtionUIComponent Initialized"))

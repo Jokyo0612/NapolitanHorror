@@ -33,6 +33,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Interaction")
 	TObjectPtr<class UInteractUIComponent> InteractionHandler;
 
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void HideInteractionIcon();
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UBoxComponent> ItemCollisionBox;
 

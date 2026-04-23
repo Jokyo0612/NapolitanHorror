@@ -30,6 +30,8 @@ public:
     UPROPERTY(EditAnywhere, Category = "Interaction")
     bool bInteractable = true;
 
+    void HideIcon();
+
 protected:
     virtual void OnRegister() override;
 

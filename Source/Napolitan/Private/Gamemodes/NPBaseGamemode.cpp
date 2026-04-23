@@ -75,6 +75,15 @@ void ANPBaseGamemode::SaveGameInstance()
 	UNPFunctionLibrary::SaveInventoryToInstance(this);
 }
 
+FGameplayTag ANPBaseGamemode::ChapterStartManager()
+{
+	FGameplayTag CurrChap = UNPFunctionLibrary::GetNPGameInstance(this)->GetCurrentChapter();
+
+	TeleportToPlayerStart(this, FName(*CurrChap.ToString()));
+
+	return CurrChap;
+}
+
 void ANPBaseGamemode::EndChapter(FGameplayTag NextChapter)
 {
 	UNPGameInstance* InstanceProgress = GetGameInstance<UNPGameInstance>();
