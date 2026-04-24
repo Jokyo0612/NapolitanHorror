@@ -8,12 +8,13 @@
 
 void UNarrationalUIComponent::TriggerNarration(FName RowName)
 {
-    if (!NarrationTable) return;
+    if (!NarrationTable || IsNarrationPlaying) return;
 
     FS_Dialogue* Data = NarrationTable->FindRow<FS_Dialogue>(RowName, TEXT(""));
 
     if (Data)
     {
+		IsNarrationPlaying = true;
         NarrationOn.Broadcast(*Data);
 
         PendingNextRow = Data->NextRowName;
@@ -69,12 +70,14 @@ void UNarrationalUIComponent::SkipNarration(FGameplayTag EventTag)
 
 void UNarrationalUIComponent::PlayNextDialogue()
 {
+	IsNarrationPlaying = false;
     TriggerNarration(PendingNextRow);
 }
 
 void UNarrationalUIComponent::EndCurrentDialogue(FGameplayTag EventTag)
 {
 	NarrationEnded.Broadcast(EventTag);
+	IsNarrationPlaying = false;
 }
 
 void UNarrationalUIComponent::StartSound()

@@ -81,6 +81,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SkipNarration(FGameplayTag EventTag);
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "State")
+	bool IsNarrationPlaying = false;
+
 #pragma endregion
 
 #pragma region Audio Component

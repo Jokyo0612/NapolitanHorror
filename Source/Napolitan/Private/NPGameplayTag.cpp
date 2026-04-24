@@ -31,6 +31,12 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Start, "Sub.00.Start");
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_GuideMet, "Sub.00.GuideMet");
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_GuideMet2, "Sub.00.GuideMet2");
+	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Video, "Sub.00.Video");
+
+	/** Rejection SubTags */
+	UE_DEFINE_GAMEPLAY_TAG(Sub_Reject_00, "Sub.Reject.00");
+	UE_DEFINE_GAMEPLAY_TAG(Sub_Reject_01, "Sub.Reject.01");
+	UE_DEFINE_GAMEPLAY_TAG(Sub_Reject_02, "Sub.Reject.02");
 
 	/** States Tags */
 	UE_DEFINE_GAMEPLAY_TAG(State_Call_Busy, "State.Call.Busy");
