@@ -51,11 +51,3 @@ void ANPNPCCharacter::Interact_Implementation(AActor* Interactor)
     }
 
 }
-
-void ANPNPCCharacter::HideInteractionIcon()
-{
-    if (InteractionHandler)
-    {
-        InteractionHandler->HideIcon();
-	}
-}

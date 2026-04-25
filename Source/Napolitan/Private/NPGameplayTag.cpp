@@ -42,6 +42,9 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(State_Call_Busy, "State.Call.Busy");
 	UE_DEFINE_GAMEPLAY_TAG(State_Call_Allow, "State.Call.Allow");
 
+	/** Event Tags */
+	UE_DEFINE_GAMEPLAY_TAG(Event_Watched_TutorialVideo, "Event.Watched.TutorialVideo");
+
 	/** Game Data Tags */
 	UE_DEFINE_GAMEPLAY_TAG(GameData_SaveGame_MetaData, "GameData.SaveGame.MetaData");
 	UE_DEFINE_GAMEPLAY_TAG(GameData_SaveGame_Slot_1, "GameData.SaveGame.Slot.1");

@@ -30,6 +30,7 @@ public:
     UPROPERTY(EditAnywhere, Category = "Interaction")
     bool bInteractable = true;
 
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
     void HideIcon();
 
 protected:
@@ -38,6 +39,9 @@ protected:
 	// Variables
     UPROPERTY(EditAnywhere, Category = "Interaction")
     float IconZOffset = 30.f;
+
+    UPROPERTY(EditAnywhere, Category = "Interaction")
+	FVector IconRelativeLocation = FVector(0.f, 0.f, 0.f);
 
     UPROPERTY(EditAnywhere, Category = "Interaction")
     float SphereRadius = 800.f;

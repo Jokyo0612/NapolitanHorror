@@ -30,11 +30,8 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On NPC Interact Event"))
 	void BP_OnNPCInteractionCalled(UNarrationalUIComponent* OwningPlayerComponent, UItemInventoryComponentBase* Inv);
 	
-	UPROPERTY(VisibleAnywhere, Category = "Interaction")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<class UInteractUIComponent> InteractionHandler;
-
-	UFUNCTION(BlueprintCallable, Category = "Interaction")
-	void HideInteractionIcon();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UBoxComponent> ItemCollisionBox;

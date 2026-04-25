@@ -24,7 +24,7 @@ protected:
 
 #pragma region Interaction UI
 
-	UPROPERTY(VisibleAnywhere, Category = "Interaction")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interaction")
 	TObjectPtr<class UInteractUIComponent> InteractionHandler;
 
 #pragma endregion

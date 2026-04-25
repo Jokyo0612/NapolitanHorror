@@ -47,10 +47,12 @@ void UInteractUIComponent::UpdateIconPosition()
         float BoxHalfHeight = OwnerBox->GetScaledBoxExtent().Z;
         float BoxTopZ = OwnerBox->GetRelativeLocation().Z + BoxHalfHeight;
 
-		InteractIconWidget->SetupAttachment(this);
-        InteractIconWidget->SetRelativeLocation(FVector(0.f, 0.f, BoxTopZ + IconZOffset));
+		IconRelativeLocation.Z = BoxTopZ + IconZOffset;
 
-		DetectSphere->SetupAttachment(this);
+        InteractIconWidget->SetupAttachment(this);
+        InteractIconWidget->SetRelativeLocation(IconRelativeLocation);
+
+        DetectSphere->SetupAttachment(this);
         DetectSphere->SetSphereRadius(SphereRadius);
     }
 }
@@ -65,7 +67,14 @@ void UInteractUIComponent::HideIcon()
 
 void UInteractUIComponent::OnDetectBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    if (OtherActor && OtherActor->IsA(APawn::StaticClass()))
+    if (OtherActor == nullptr || OtherActor == GetOwner())
+    {
+        return;
+    }
+
+    APawn* OverlappedPawn = Cast<APawn>(OtherActor);
+
+    if (OverlappedPawn && OverlappedPawn->IsPlayerControlled())
     {
         if (bInteractable) { InteractIconWidget->SetVisibility(true); }
     }
@@ -73,7 +82,9 @@ void UInteractUIComponent::OnDetectBeginOverlap(UPrimitiveComponent* OverlappedC
 
 void UInteractUIComponent::OnDetectEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-    if (OtherActor && OtherActor->IsA(APawn::StaticClass()))
+    APawn* OverlappedPawn = Cast<APawn>(OtherActor);
+
+    if (OverlappedPawn && OverlappedPawn->IsPlayerControlled())
     {
         InteractIconWidget->SetVisibility(false);
     }
