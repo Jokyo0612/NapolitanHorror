@@ -56,8 +56,8 @@ public:
 	FGameplayTag GetCurrentChapter() const;
 	
 	UFUNCTION(BlueprintCallable, Category = "Game Instance")
-	void AddEvent(const FGameplayTag& EventTag);
+	void AddEvent(FGameplayTag EventTag);
 
 	UFUNCTION(BlueprintPure, Category = "Game Instance")
-	bool HasEventOccurred(const FGameplayTag& EventTag) const;
+	bool HasEventOccurred(FGameplayTag EventTag) const;
 };

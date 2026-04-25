@@ -9,5 +9,5 @@ float FS_Dialogue::GetDisplayDuration() const
 
     int32 CharCount = DialogueText.ToString().Len();
 
-    return (CharCount * 0.2f) + 1.0f;
+    return (CharCount * 0.1f) + 1.0f;
 }

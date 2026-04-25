@@ -31,7 +31,7 @@ FGameplayTag UNPGameInstance::GetCurrentChapter() const
 	return CurrentChapter;
 }
 
-void UNPGameInstance::AddEvent(const FGameplayTag& EventTag)
+void UNPGameInstance::AddEvent(FGameplayTag EventTag)
 {
 	if (EventTag.IsValid() && !EventOccurred.Contains(EventTag))
 	{
@@ -39,7 +39,7 @@ void UNPGameInstance::AddEvent(const FGameplayTag& EventTag)
 	}
 }
 
-bool UNPGameInstance::HasEventOccurred(const FGameplayTag& EventTag) const
+bool UNPGameInstance::HasEventOccurred(FGameplayTag EventTag) const
 {
 	if(EventTag.IsValid())
 	{

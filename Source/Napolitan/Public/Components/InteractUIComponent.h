@@ -27,7 +27,7 @@ public:
     UPROPERTY(VisibleAnywhere, Category = "Interaction")
     TObjectPtr<class USphereComponent> DetectSphere;
 
-    UPROPERTY(EditAnywhere, Category = "Interaction")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interaction")
     bool bInteractable = true;
 
 	UFUNCTION(BlueprintCallable, Category = "Interaction")

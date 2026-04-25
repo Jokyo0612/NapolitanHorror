@@ -15,7 +15,7 @@ UInteractUIComponent::UInteractUIComponent()
     InteractIconWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractIcon"));
     InteractIconWidget->SetWidgetSpace(EWidgetSpace::Screen);
     InteractIconWidget->SetVisibility(false);
-    InteractIconWidget->SetDrawSize(FVector2D(50.0f, 50.0f));
+    InteractIconWidget->SetDrawSize(FVector2D(72.0f, 72.0f));
 
     DetectSphere = CreateDefaultSubobject<USphereComponent>(TEXT("DetectSphere"));
     DetectSphere->OnComponentBeginOverlap.AddDynamic(this, &UInteractUIComponent::OnDetectBeginOverlap);
@@ -67,7 +67,7 @@ void UInteractUIComponent::HideIcon()
 
 void UInteractUIComponent::OnDetectBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    if (OtherActor == nullptr || OtherActor == GetOwner())
+    if (OtherActor == nullptr || OtherActor == GetOwner() || !bInteractable)
     {
         return;
     }
