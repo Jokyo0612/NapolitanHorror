@@ -189,6 +189,9 @@ void ANPPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 	// Get Phone Call
 	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_PhoneCall, ETriggerEvent::Started, this, &ThisClass::Get_Phone);
+
+	// HandLight Key
+	NPInputComponent->BindNativeInputAction(InputConfigDataAsset, NPGamplayTags::InputTag_HandLight, ETriggerEvent::Started, this, &ThisClass::HandLight);
 }
 
 

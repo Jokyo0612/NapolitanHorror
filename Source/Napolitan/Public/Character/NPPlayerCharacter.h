@@ -184,6 +184,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void Get_Phone();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Input")
+	void HandLight();
+
 #pragma endregion
 
 #pragma region Input_Interact

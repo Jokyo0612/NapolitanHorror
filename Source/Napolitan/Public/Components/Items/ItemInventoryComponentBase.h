@@ -29,6 +29,9 @@ public:
     void UseItem(FName ItemToUse);
 
     UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool HasItem(FName ItemID) const;
+
+    UFUNCTION(BlueprintCallable, Category = "Inventory")
     const TArray<FName>& GetItems(EItemCategory Category) const;
 
     FS_Item* GetItemData(FName ItemID) const;

@@ -60,6 +60,17 @@ void UItemInventoryComponentBase::UseItem(FName ItemToUse)
 	}
 }
 
+bool UItemInventoryComponentBase::HasItem(FName ItemID) const
+{
+    if (!ItemDataTable) return false;
+
+    FS_Item* ItemData = ItemDataTable->FindRow<FS_Item>(ItemID, TEXT("HasItem"));
+    if (!ItemData) return false;
+
+    const TArray<FName>& InventorySection = CategorizedItems[ItemData->ItemType].Items;
+    return InventorySection.Contains(ItemID);
+}
+
 const TArray<FName>& UItemInventoryComponentBase::GetItems(EItemCategory Category) const
 {
     return CategorizedItems[Category].Items;

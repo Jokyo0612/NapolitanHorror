@@ -19,7 +19,9 @@ void ANPItem_Getable::Interact_Implementation(AActor* Interactor)
 				// Need to Implementating Acquiring Effect
 				// PlayAcquireEffects();
 
-				Destroy();
+				BP_OnGetableItemInteract(Interactor);
+
+				Destroy();				
 			}
 		}
 	}
