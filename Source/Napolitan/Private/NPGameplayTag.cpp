@@ -37,6 +37,7 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Video, "Sub.00.Video");
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Quest01, "Sub.00.Quest01");
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_HandLight, "Sub.00.HandLight");
+	UE_DEFINE_GAMEPLAY_TAG(Sub_00_ShadowLight, "Sub.00.ShadowLight");
 
 	/** States Tags */
 	UE_DEFINE_GAMEPLAY_TAG(State_Call_Busy, "State.Call.Busy");
