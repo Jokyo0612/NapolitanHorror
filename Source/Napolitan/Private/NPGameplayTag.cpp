@@ -23,6 +23,7 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_Warehouse, "Chapter.00.Warehouse");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_MonitorRoom, "Chapter.00.MonitorRoom");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_FindCart, "Chapter.00.FindCart");
+	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_GoBackCCTV, "Chapter.00.GoBackCCTV");
 
 	/** Call Tags */
 	UE_DEFINE_GAMEPLAY_TAG(Call_00_Tutorial, "Call.00.Tutorial");
@@ -45,6 +46,7 @@ namespace NPGamplayTags
 
 	/** Event Tags */
 	UE_DEFINE_GAMEPLAY_TAG(Event_Watched_TutorialVideo, "Event.Watched.TutorialVideo");
+	UE_DEFINE_GAMEPLAY_TAG(Event_Watched_ShadowLight, "Event.Watched.ShadowLight");
 
 	/** Game Data Tags */
 	UE_DEFINE_GAMEPLAY_TAG(GameData_SaveGame_MetaData, "GameData.SaveGame.MetaData");

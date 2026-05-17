@@ -67,8 +67,15 @@ bool UItemInventoryComponentBase::HasItem(FName ItemID) const
     FS_Item* ItemData = ItemDataTable->FindRow<FS_Item>(ItemID, TEXT("HasItem"));
     if (!ItemData) return false;
 
-    const TArray<FName>& InventorySection = CategorizedItems[ItemData->ItemType].Items;
-    return InventorySection.Contains(ItemID);
+    const FInventoryArray* FoundSection = CategorizedItems.Find(ItemData->ItemType);
+
+    if (FoundSection == nullptr)
+    {
+        return false;
+    }
+
+    // 3. 카테고리가 존재할 때만 안전하게 내부 Items 배열에 아이템이 있는지 확인합니다.
+    return FoundSection->Items.Contains(ItemID);
 }
 
 const TArray<FName>& UItemInventoryComponentBase::GetItems(EItemCategory Category) const
