@@ -24,10 +24,12 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_MonitorRoom, "Chapter.00.MonitorRoom");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_FindCart, "Chapter.00.FindCart");
 	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_GoBackCCTV, "Chapter.00.GoBackCCTV");
+	UE_DEFINE_GAMEPLAY_TAG(Chapter_00_Escape, "Chapter.00.Escape");
 
 	/** Call Tags */
 	UE_DEFINE_GAMEPLAY_TAG(Call_00_Tutorial, "Call.00.Tutorial");
 	UE_DEFINE_GAMEPLAY_TAG(Call_00_FindCart, "Call.00.FindCart");
+	UE_DEFINE_GAMEPLAY_TAG(Call_00_Escape, "Call.00.Escape");
 
 	/** Subscribes Tags */
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Room, "Sub.00.Room");
@@ -39,6 +41,7 @@ namespace NPGamplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Quest01, "Sub.00.Quest01");
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_HandLight, "Sub.00.HandLight");
 	UE_DEFINE_GAMEPLAY_TAG(Sub_00_ShadowLight, "Sub.00.ShadowLight");
+	UE_DEFINE_GAMEPLAY_TAG(Sub_00_Radio, "Sub.00.Radio");
 
 	/** States Tags */
 	UE_DEFINE_GAMEPLAY_TAG(State_Call_Busy, "State.Call.Busy");

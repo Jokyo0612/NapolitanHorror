@@ -22,6 +22,9 @@ class NAPOLITAN_API ANP_CCTV : public ANPItemBase
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float EventSec;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float GroupEventMin;
 
 public:
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "CCTV")

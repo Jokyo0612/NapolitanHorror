@@ -32,5 +32,5 @@ ANPItemBase::ANPItemBase()
 
 void ANPItemBase::Interact_Implementation(AActor* Interactor)
 {
-	return;
+	if (!Interactor || !InteractionHandler->bInteractable) return;
 }
