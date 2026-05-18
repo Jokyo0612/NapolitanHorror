@@ -2,24 +2,30 @@
 
 
 #include "Items/Maps/NP_CCTV.h"
+#include "Components/StageControll/NPCH0Component.h"
+
+ANP_CCTV::ANP_CCTV()
+{
+	CCTVComponent = CreateDefaultSubobject<UNPCH0Component>(TEXT("CCTVComponent"));
+}
 
 bool ANP_CCTV::PuzzleCCTV(int32 Clicked)
 {
 	if (CCTV_ARRAY[CCTV_Ptr] == Clicked)
 	{
-		OnCCTVStateChanged.Broadcast(CCTV_Ptr);
+		CCTVComponent->OnCCTVStateChanged.Broadcast(CCTV_Ptr);
 		CCTV_Ptr++;
 
 		if (CCTV_Ptr >= 3)
 		{
-			OnCCTVStateChanged.Broadcast(CCTV_Ptr);
-		}
+			CCTVComponent->OnCCTVEnded.Broadcast();
 
 		return true;
+		}
 	}
 	else if (Clicked == 3)
 	{
-		OnCCTVStateChanged.Broadcast(CCTV_Ptr);
+		CCTVComponent->OnCCTVStateChanged.Broadcast(CCTV_Ptr);
 	}
 
 	return false;
