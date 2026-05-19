@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Gamemodes/NPBaseGamemode.h"
+#include "Interface/StageControlInterface.h"
 #include "NPCh0_Gamemode.generated.h"
 
 class UNPCH0Component;
@@ -12,7 +13,7 @@ class UNPCH0Component;
  * 
  */
 UCLASS()
-class NAPOLITAN_API ANPCh0_Gamemode : public ANPBaseGamemode
+class NAPOLITAN_API ANPCh0_Gamemode : public ANPBaseGamemode, public IStageControlInterface
 {
 	GENERATED_BODY()
 	
@@ -24,4 +25,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CCTV")
 	UNPCH0Component* CCTVComponent;
 	
+public:
+	virtual UNPCH0Component* GetCh0Component() const override;
 };

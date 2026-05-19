@@ -21,7 +21,7 @@ void ANPItem_Getable::Interact_Implementation(AActor* Interactor)
 
 				BP_OnGetableItemInteract(Interactor);
 
-				Destroy();				
+				Destroy();
 			}
 		}
 	}

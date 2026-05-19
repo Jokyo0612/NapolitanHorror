@@ -13,3 +13,8 @@ void ANPCh0_Gamemode::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
+UNPCH0Component* ANPCh0_Gamemode::GetCh0Component() const
+{
+	return CCTVComponent;
+}

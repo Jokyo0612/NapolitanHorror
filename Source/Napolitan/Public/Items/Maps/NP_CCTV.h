@@ -16,12 +16,12 @@ class NAPOLITAN_API ANP_CCTV : public ANPItemBase
 {
 	GENERATED_BODY()
 
-	ANP_CCTV();
-
 	int32 CCTV_Ptr = 0;
 	int32 CCTV_ARRAY[3] = { 5, 4, 6 };
 	
 protected:
+	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CCTV")
 	UNPCH0Component* CCTVComponent;
 

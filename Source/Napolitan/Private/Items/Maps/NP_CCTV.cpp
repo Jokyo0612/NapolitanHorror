@@ -3,10 +3,20 @@
 
 #include "Items/Maps/NP_CCTV.h"
 #include "Components/StageControll/NPCH0Component.h"
+#include "Interface/StageControlInterface.h"
+#include "GameFramework/GameModeBase.h"
 
-ANP_CCTV::ANP_CCTV()
+void ANP_CCTV::BeginPlay()
 {
-	CCTVComponent = CreateDefaultSubobject<UNPCH0Component>(TEXT("CCTVComponent"));
+	Super::BeginPlay();
+
+	if (GetWorld() && GetWorld()->GetAuthGameMode())
+	{
+		if (IStageControlInterface* StageControlInterface = Cast<IStageControlInterface>(GetWorld()->GetAuthGameMode()))
+		{
+			CCTVComponent = StageControlInterface->GetCh0Component();
+		}
+	}
 }
 
 bool ANP_CCTV::PuzzleCCTV(int32 Clicked)

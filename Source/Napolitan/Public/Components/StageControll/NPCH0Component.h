@@ -9,6 +9,8 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCCTVStateChanged, int32, Clicked_NUM);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCCTVEnded);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnRun);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class NAPOLITAN_API UNPCH0Component : public UActorComponent
 {
@@ -27,4 +29,7 @@ public:
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "CCTV")
 	FOnCCTVEnded OnCCTVEnded;
+
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "CCTV")
+	FOnRun OnRun;
 };
