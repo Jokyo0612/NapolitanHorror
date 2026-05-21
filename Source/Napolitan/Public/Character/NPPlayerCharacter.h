@@ -107,7 +107,7 @@ protected:
 	float SprintMeter = 0.0f;
 
 	/** How long we can sprint for, in seconds */
-	UPROPERTY(EditAnywhere, Category = "Sprint", meta = (ClampMin = 0, ClampMax = 10, Units = "s"))
+	UPROPERTY(EditAnywhere, Category = "Sprint", meta = (ClampMin = 0, ClampMax = 50, Units = "s"))
 	float SprintTime = 5.0f;
 
 	/** Walk speed while sprinting */

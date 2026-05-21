@@ -11,8 +11,11 @@
 
 ANP_AfterCCTV::ANP_AfterCCTV()
 {
+	USceneComponent* DefaultSceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultSceneRoot"));
+	SetRootComponent(DefaultSceneRoot);
+
 	ItemCollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("ItemCollisionBox"));
-	ItemCollisionBox->SetupAttachment(GetRootComponent());
+	ItemCollisionBox->SetupAttachment(DefaultSceneRoot);
 	ItemCollisionBox->SetBoxExtent(FVector(20.f));
 	// No Physics Option
 	ItemCollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
