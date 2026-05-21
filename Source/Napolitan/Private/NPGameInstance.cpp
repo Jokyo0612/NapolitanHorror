@@ -48,3 +48,10 @@ bool UNPGameInstance::HasEventOccurred(FGameplayTag EventTag) const
 
 	return false;
 }
+
+void UNPGameInstance::SetCurrentGameState(ENPGameState NewState)
+{
+	CurrentGameState = NewState;
+
+	OnGameStateChanged.Broadcast(CurrentGameState);
+}

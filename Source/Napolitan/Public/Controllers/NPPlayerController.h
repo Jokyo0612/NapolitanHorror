@@ -24,7 +24,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "UI")
 	TSubclassOf<UNPWidgetBase> DefaultUIClass;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, Category = "UI")
 	TObjectPtr<UNPWidgetBase> DefaultUI;
 
 	virtual void OnPossess(APawn* aPawn) override;

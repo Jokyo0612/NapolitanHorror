@@ -6,6 +6,7 @@
 #include "Components/StageControll/NPCH0Component.h"
 #include "Interface/StageControlInterface.h"
 #include "GameFramework/GameModeBase.h"
+#include "NPFunctionLibrary.h"
 
 #include "DebugHelper.h"
 
@@ -53,7 +54,7 @@ void ANP_AfterCCTV::OnOverlapDarkWall(UPrimitiveComponent* OverlappedComponent, 
 	APawn* PlayerPawn = Cast<APawn>(OtherActor);
 	if (PlayerPawn && PlayerPawn->IsPlayerControlled())
 	{
-		Debug::Print("You Died");
+		UNPFunctionLibrary::call_died(this);
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "SaveGame/NPSaveGame.h"
 #include "SaveGame/NPMetaSaveGame.h"
 #include "Character/NPPlayerCharacter.h"
+#include "Gamemodes/NPBaseGamemode.h"
 
 #include "DebugHelper.h"
 
@@ -165,4 +166,9 @@ FGameplayTag UNPFunctionLibrary::GetSaveSlotSummary(FGameplayTag SlotTag)
 		}
 	}
 	return FGameplayTag();
+}
+
+void UNPFunctionLibrary::call_died(const UObject* WorldContextObject)
+{
+	GetNPGameInstance(WorldContextObject)->SetCurrentGameState(ENPGameState::GameOver);
 }

@@ -52,5 +52,6 @@ public:
 
 #pragma endregion
 
-
+	UFUNCTION(BlueprintCallable, Category = "Napolitan|FunctionLibrary")
+	static void call_died(const UObject* WorldContextObject);
 };

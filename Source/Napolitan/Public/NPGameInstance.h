@@ -8,6 +8,17 @@
 #include "Components/Items/ItemInventoryComponentBase.h"
 #include "NPGameInstance.generated.h"
 
+UENUM(BlueprintType)
+enum class ENPGameState : uint8
+{
+	WaitingToStart UMETA(DisplayName = "Waiting To Start"),
+	InProgress UMETA(DisplayName = "In Progress"),
+	Paused UMETA(DisplayName = "Paused"),
+	GameOver UMETA(DisplayName = "Game Over")
+};
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameStateChanged, ENPGameState, CurrentState);
+
 USTRUCT(BlueprintType)
 struct FNPChapterData
 {
@@ -60,4 +71,18 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Game Instance")
 	bool HasEventOccurred(FGameplayTag EventTag) const;
+
+#pragma region Game State
+
+public:
+	void SetCurrentGameState(ENPGameState NewState);
+
+private:
+	UPROPERTY()
+	ENPGameState CurrentGameState;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnGameStateChanged OnGameStateChanged;
+
+#pragma endregion
 };

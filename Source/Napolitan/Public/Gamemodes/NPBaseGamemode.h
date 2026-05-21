@@ -7,16 +7,19 @@
 #include "NPGameplayTag.h"
 #include "NPBaseGamemode.generated.h"
 
-UENUM(BlueprintType)
-enum class ENPGameState : uint8
-{
-	WaitingToStart UMETA(DisplayName = "Waiting To Start"),
-	InProgress UMETA(DisplayName = "In Progress"),
-	Paused UMETA(DisplayName = "Paused"),
-	GameOver UMETA(DisplayName = "Game Over")
-};
+//UENUM(BlueprintType)
+//enum class ENPGameState : uint8
+//{
+//	WaitingToStart UMETA(DisplayName = "Waiting To Start"),
+//	InProgress UMETA(DisplayName = "In Progress"),
+//	Paused UMETA(DisplayName = "Paused"),
+//	GameOver UMETA(DisplayName = "Game Over")
+//};
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameStateChanged, ENPGameState, CurrentState);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameStateChanged, ENPGameState, CurrentState);
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChapterRetry);
 
 class UNarrationalUIComponent;
 
@@ -30,7 +33,6 @@ class NAPOLITAN_API ANPBaseGamemode : public AGameModeBase
 	
 protected:
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaSeconds) override;
 	
 #pragma region Chapter Management
 
@@ -48,6 +50,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	FGameplayTag ChapterStartManager();
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FChapterRetry OnChapterRetry;
+
 #pragma endregion
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning NarrtionUIComponent Initialized"))
@@ -56,14 +61,15 @@ protected:
 
 #pragma region Game State
 
-	void SetCurrentGameState(ENPGameState NewState);
+//public:
+//	void SetCurrentGameState(ENPGameState NewState);
+//
+//private:
+//	UPROPERTY()
+//	ENPGameState CurrentGameState;
 
-private:
-	UPROPERTY()
-	ENPGameState CurrentGameState;
-
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnGameStateChanged OnGameStateChanged;
+	/*UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnGameStateChanged OnGameStateChanged;*/
 
 #pragma endregion
 };

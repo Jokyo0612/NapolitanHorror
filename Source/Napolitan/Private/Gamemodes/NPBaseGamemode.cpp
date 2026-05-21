@@ -25,11 +25,6 @@ void ANPBaseGamemode::BeginPlay()
 	}
 }
 
-void ANPBaseGamemode::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-}
-
 AActor* ANPBaseGamemode::ChoosePlayerStart_Implementation(AController* Player)
 {
 	FString TargetTag = UNPFunctionLibrary::GetNPGameInstance(GetWorld())->GetCurrentChapter().ToString();
@@ -100,9 +95,9 @@ void ANPBaseGamemode::EndChapter(FGameplayTag NextChapter)
 	}
 }
 
-void ANPBaseGamemode::SetCurrentGameState(ENPGameState NewState)
-{
-	CurrentGameState = NewState;
-
-	OnGameStateChanged.Broadcast(CurrentGameState);
-}
+//void ANPBaseGamemode::SetCurrentGameState(ENPGameState NewState)
+//{
+//	CurrentGameState = NewState;
+//
+//	//OnGameStateChanged.Broadcast(CurrentGameState);
+//}
